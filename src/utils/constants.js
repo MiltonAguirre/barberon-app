@@ -1,0 +1,6 @@
+export const PRIMARY_COLOR="#F05454"
+export const SECONDARY_COLOR="#30475E"
+export const DARK_COLOR="#222831"
+export const LIGHT_COLOR="#DDDDDD"
+export const THIRD_COLOR="#A7A7A7"
+export const THIRD_LIGTH_COLOR="#8F8B8B2D"
