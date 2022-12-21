@@ -16,7 +16,7 @@ const BarbershopScreen = props => {
   const newTurn = async (product_id, start) => {
     if (!myRole) {
       const {token, setLoading, setSuccess} = props;
-      setLoading();
+      setLoading(true);
       try {
         const response = await createTurn(token, product_id, start);
         console.log(response);

@@ -7,7 +7,6 @@ import {getBarbershop, getBarbershops} from '../API';
 import {checkInternetConection} from '../utils';
 
 const HomeScreen = props => {
-  console.log("HomeScreen : ", props.isLoading);
   const [search, onChangeSearch] = useState('');
   const [barbershops, setBarbershops] = useState(null);
   const [trySubmit, setTrySubmit] = useState(false);

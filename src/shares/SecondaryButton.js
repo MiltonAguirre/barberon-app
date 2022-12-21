@@ -1,7 +1,7 @@
 import React from 'react';
 import {TouchableOpacity, Text, View, ActivityIndicator} from 'react-native';
 import {PRIMARY_COLOR, LIGHT_COLOR} from '../utils/constants';
-const SecondaryButton = ({title, onPress, isLoading}) => {
+const SecondaryButton = ({title, onPress, loading}) => {
   const bgColor = title == 'INGRESAR' ? PRIMARY_COLOR : LIGHT_COLOR;
   const color = title == 'INGRESAR' ? LIGHT_COLOR : PRIMARY_COLOR;
   return (
@@ -16,7 +16,7 @@ const SecondaryButton = ({title, onPress, isLoading}) => {
       }}
       onPress={onPress}>
       <React.Fragment>
-        {!isLoading ? (
+        {!loading ? (
           <Text
             style={{
               color: color,

@@ -11,7 +11,6 @@ import { LIGHT_COLOR } from "../utils/constants";
 import { getFullPathImage } from "../utils";
 
 const ProductPreview = ({ name, images, index, onPressProduct }) => {
-  console.log(getFullPathImage(images[0].path));
   return (
     <TouchableOpacity onPress={() => onPressProduct(index)} style={styles.container}>
       <ImageBackground

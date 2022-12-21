@@ -4,7 +4,7 @@ import {Button} from 'react-native-elements';
 import SecondaryButton from '../../../shares/SecondaryButton';
 import styles from './styles';
 
-const SignInForm = ({goToSignUp, submit, isError, goToHome, isLoading}) => {
+const SignInForm = ({goToSignUp, submit, isError, goToHome, loading}) => {
   const [username, onChangeUsername] = React.useState('');
   const [password, onChangePassword] = React.useState('');
   const onSubmit = () => {
@@ -48,7 +48,7 @@ const SignInForm = ({goToSignUp, submit, isError, goToHome, isLoading}) => {
             type="clear"
             onPress={goToHome}
           />
-          <SecondaryButton onPress={onSubmit} title="INGRESAR" isLoading={isLoading}/>
+          <SecondaryButton onPress={onSubmit} title="INGRESAR" loading={loading}/>
           <SecondaryButton onPress={goToSignUp} title="REGISTRAR" />
         </View>
       </View>

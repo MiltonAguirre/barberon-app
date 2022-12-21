@@ -5,18 +5,16 @@ import {connect} from 'react-redux';
 import {login} from '../../API';
 import {
   setSession,
-  setLoading,
   setSuccess,
   setError,
 } from '../../actions/SessionActions';
 
 const SignInScreen = props => {
-  console.log('Login screen: ', props.isLoading);
   const [isLogged, setIsLogged] = useState(null);
+  const [loading, setLoading] = useState(false);
   const {navigation} = props;
   const submit = async (email, password) => {
-    console.log('sign');
-    const {setSession, setLoading, setSuccess} = props;
+    const {setSession, setSuccess} = props;
     setLoading(true);
     try {
       const response = await login(email, password);
@@ -52,6 +50,7 @@ const SignInScreen = props => {
         goToHome={goToHome}
         goToSignUp={goToSignUp}
         submit={submit}
+        loading={loading}
         {...props}
       />
     </View>
@@ -62,7 +61,6 @@ function mapToProps({session}) {
   return session;
 }
 export default connect(mapToProps, {
-  setLoading,
   setSession,
   setSuccess,
   setError,
