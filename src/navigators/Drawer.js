@@ -8,7 +8,6 @@ import {
 } from 'react-native-responsive-screen';
 import SignOut from '../pages/auth/LogOut';
 import TabHome from './TabHome';
-import {useSelector} from 'react-redux';
 import {
   createDrawerNavigator,
   DrawerContentScrollView,
@@ -16,11 +15,12 @@ import {
   DrawerItem,
 } from '@react-navigation/drawer';
 import ItemMenu from '../shares/ItemMenu';
+import {connect} from 'react-redux';
 
 const Drawer = createDrawerNavigator();
 
 function CustomDrawerContent(props) {
-  const {goToLogin} = props
+  const {goToLogin, signOut, token} = props;
   return (
     <DrawerContentScrollView {...props}>
       <DrawerItemList {...props} />
@@ -52,33 +52,58 @@ function CustomDrawerContent(props) {
         )}
         onPress={() =>
           Linking.openURL(
-            'whatsapp://send?text=Hola,%20necesito%20ayuda&phone=+543425157626',
+            'whatsapp://send?text=Hola,%20necesito%20ayuda&phone=+543425784942',
           )
         }
       />
-      <DrawerItem
-        label="Login"
-        labelStyle={styles.label}
-        icon={() => (
-          <Icon
-            name="sign-in-alt"
-            type="font-awesome-5"
-            style={styles.icon}
-            color={PRIMARY_COLOR}
-            size={25}
-            containerStyle={styles.icon}
-          />
-        )}
-        onPress={goToLogin}
-      />
+      {!token ? (
+        <DrawerItem
+          label="Ingresar"
+          labelStyle={styles.label}
+          icon={() => (
+            <Icon
+              name="sign-in-alt"
+              type="font-awesome-5"
+              style={styles.icon}
+              color={PRIMARY_COLOR}
+              size={25}
+              containerStyle={styles.icon}
+            />
+          )}
+          onPress={goToLogin}
+        />
+      ) : (
+        <DrawerItem
+          label="Salir"
+          labelStyle={styles.label}
+          icon={() => (
+            <Icon
+              name="sign-out-alt"
+              type="font-awesome-5"
+              style={styles.icon}
+              color={PRIMARY_COLOR}
+              size={25}
+              containerStyle={styles.icon}
+            />
+          )}
+          onPress={signOut}
+        />
+      )}
     </DrawerContentScrollView>
   );
 }
-const MyDrawer = ({navigation}) => {
-  console.log(navigation);
+const MyDrawer = props => {
+  const {navigation, token} = props;
   return (
     <Drawer.Navigator
-      drawerContent={props => <CustomDrawerContent {...props} goToLogin={()=>navigation.replace("AuthStack")}/>}
+      drawerContent={props => (
+        <CustomDrawerContent
+          {...props}
+          goToLogin={() => navigation.replace('AuthStack')}
+          signOut={() => navigation.navigate('Logout')}
+          token={token}
+        />
+      )}
       drawerStyle={styles.menu}
       screenOptions={{
         headerShown: false,
@@ -101,8 +126,6 @@ const MyDrawer = ({navigation}) => {
   );
 };
 
-export default MyDrawer;
-
 const styles = StyleSheet.create({
   menu: {
     backgroundColor: DARK_COLOR,
@@ -116,3 +139,7 @@ const styles = StyleSheet.create({
     fontSize: hp('2%'),
   },
 });
+function mapStateToProps({session}) {
+  return session;
+}
+export default connect(mapStateToProps)(MyDrawer);

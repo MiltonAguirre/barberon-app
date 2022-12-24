@@ -1,5 +1,6 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
+import {connect} from 'react-redux';
 import {Icon} from 'react-native-elements';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
@@ -63,7 +64,7 @@ function TurnsStackScreen() {
 
 const Tab = createBottomTabNavigator();
 
-function MyTabs() {
+function MyTabs({token}) {
   return (
     <Tab.Navigator
       screenOptions={({route}) => ({
@@ -102,16 +103,31 @@ function MyTabs() {
         component={HomeStackScreen}
         options={{headerShown: false}}
       />
-      {/*
-       *<Tab.Screen style={{ paddingBottom: 12 }} showLabel={false} name="Turns" component={TurnsStackScreen} options={{ headerShown: false }} />
-       *<Tab.Screen style={{ paddingBottom: 12 }} showLabel={false} name="Profile" component={ProfileStackScreen} options={{ headerShown: false }} />
-       */}
+      {token && (
+        <>
+          <Tab.Screen
+            style={{paddingBottom: 12}}
+            showLabel={false}
+            name="Turns"
+            component={TurnsStackScreen}
+            options={{headerShown: false}}
+          />
+          <Tab.Screen
+            style={{paddingBottom: 12}}
+            showLabel={false}
+            name="Profile"
+            component={ProfileStackScreen}
+            options={{headerShown: false}}
+          />
+        </>
+      )}
     </Tab.Navigator>
   );
 }
 
 const Stack = createNativeStackNavigator();
-export default function App() {
+
+function App(props) {
   return (
     <Stack.Navigator screenOptions={{headerShown: false}}>
       <Stack.Screen
@@ -119,11 +135,15 @@ export default function App() {
         options={{
           header: () => null,
         }}
-        component={MyTabs}
+        component={() => <MyTabs {...props} />}
       />
     </Stack.Navigator>
   );
 }
+function mapStateToProps({session}) {
+  return session;
+}
+export default connect(mapStateToProps)(App);
 
 const styles = StyleSheet.create({
   container: {
