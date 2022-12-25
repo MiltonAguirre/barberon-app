@@ -1,66 +1,112 @@
-import React, { useState, useEffect } from 'react'
-import { connect } from 'react-redux';
-import { setSuccess, setLoading } from '../../actions/SessionActions'
-import MyBarberContainer from '../../containers/barbershop/MyBarber'
-import FormBarber from '../../containers/barbershop/FormBarber'
-import { ActivityIndicator } from 'react-native';
-import { getMyBarbershop, createBarbershops } from '../../API';
+import React, {useState, useEffect} from 'react';
+import {connect} from 'react-redux';
+import {setError} from '../../actions/SessionActions';
+import MyBarberContainer from '../../containers/barbershop/MyBarber';
+import FormBarber from '../../containers/barbershop/FormBarber';
+import {ActivityIndicator} from 'react-native';
+import {getMyBarbershop, createBarbershops} from '../../API';
+import {checkInternetConection} from '../../utils';
 
-const MyBarbershop = (props) => {
-  const [barbershop, setBarbershop] = useState(null)
+const MyBarbershop = ({navigation, token}) => {
+  const [barbershop, setBarbershop] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [trySubmit, setTrySubmit] = useState(false);
   const getData = async () => {
-    const { token } = props
-    const response = await getMyBarbershop(token);
-    setBarbershop(response.data)
-  }
+    try {
+      setLoading(true);
+      const internet = await checkInternetConection();
+      if (!internet) {
+        setError('Verifica tu conexión a internet');
+        setTrySubmit(!trySubmit);
+      } else {
+        const response = await getMyBarbershop(token);
+        setBarbershop(response.data);
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-  const submitNewBarbershop = async (name, phone, zip, country, address, city, state, days, opens, closes) => {
-    const { token, setLoading, setSuccess } = props
-    setLoading()
-    const response = await createBarbershops(token, name, phone, zip, country, address, city, state, days, opens, closes)
-    setSuccess()
-    setBarbershop(response.data)
-
-  }
+  const submitNewBarbershop = async (
+    name,
+    phone,
+    zip,
+    country,
+    address,
+    city,
+    state,
+    days,
+    opens,
+    closes,
+  ) => {
+    try {
+      setLoading(true);
+      const internet = await checkInternetConection();
+      if (!internet) {
+        setError('Verifica tu conexión a internet');
+        setTrySubmit(!trySubmit);
+      } else {
+        const response = await createBarbershops(
+          token,
+          name,
+          phone,
+          zip,
+          country,
+          address,
+          city,
+          state,
+          days,
+          opens,
+          closes,
+        );
+        setBarbershop(response.data);
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
   const goToMyProducts = () => {
-    const { navigation } = props
     navigation.navigate('MyProducts');
-
-  }
+  };
 
   const goToHome = () => {
-    props.navigation.navigate('Home')
-  }
+    navigation.navigate('Home');
+  };
 
   const openDrawer = () => {
-    props.navigation.toggleDrawer()
-  }
+    navigation.toggleDrawer();
+  };
   useEffect(() => {
-    const { setLoading, setSuccess } = props
-    setLoading()
-    getData()
-    setSuccess()
-  }, [])
+    getData();
+  }, []);
 
   return (
-    <React.Fragment >
-      {
-        props.isLoading ?
-          (
-            <ActivityIndicator />
-          )
-          : (
-            barbershop
-              ? <MyBarberContainer {...barbershop} goToMyProducts={goToMyProducts} goToHome={goToHome} openDrawer={openDrawer} />
-              : <FormBarber submit={submitNewBarbershop} goToHome={goToHome} openDrawer={openDrawer} />
-          )
-
-      }
+    <React.Fragment>
+      {loading ? (
+        <ActivityIndicator />
+      ) : barbershop ? (
+        <MyBarberContainer
+          {...barbershop}
+          goToMyProducts={goToMyProducts}
+          goToHome={goToHome}
+          openDrawer={openDrawer}
+        />
+      ) : (
+        <FormBarber
+          submit={submitNewBarbershop}
+          goToHome={goToHome}
+          openDrawer={openDrawer}
+        />
+      )}
     </React.Fragment>
   );
-}
+};
 
-function mapToProps({ session }) {
-  return session
+function mapToProps({session}) {
+  return session;
 }
-export default connect(mapToProps, { setSuccess, setLoading })(MyBarbershop);
+export default connect(mapToProps, {setError})(MyBarbershop);
