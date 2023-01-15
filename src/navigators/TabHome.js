@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
-import {connect} from 'react-redux';
+import {useSelector} from 'react-redux';
 import {Icon} from 'react-native-elements';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
@@ -64,7 +64,8 @@ function TurnsStackScreen() {
 
 const Tab = createBottomTabNavigator();
 
-function MyTabs({token}) {
+function MyTabs() {
+  const {token} = useSelector(state => state.session);
   return (
     <Tab.Navigator
       screenOptions={({route}) => ({
@@ -127,7 +128,7 @@ function MyTabs({token}) {
 
 const Stack = createNativeStackNavigator();
 
-function App(props) {
+export default function App() {
   return (
     <Stack.Navigator screenOptions={{headerShown: false}}>
       <Stack.Screen
@@ -135,15 +136,11 @@ function App(props) {
         options={{
           header: () => null,
         }}
-        component={() => <MyTabs {...props} />}
+        component={MyTabs}
       />
     </Stack.Navigator>
   );
 }
-function mapStateToProps({session}) {
-  return session;
-}
-export default connect(mapStateToProps)(App);
 
 const styles = StyleSheet.create({
   container: {
