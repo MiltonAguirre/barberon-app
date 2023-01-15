@@ -12,6 +12,7 @@ import {DARK_COLOR, LIGHT_COLOR, PRIMARY_COLOR} from '../utils/constants';
 import Home from '../pages/Home';
 import Profile from '../pages/Profile';
 import Turns from '../pages/Turns';
+import MyBarbershop from '../pages/barbershop/MyBarbershop';
 
 const HomeStack = createNativeStackNavigator();
 function HomeStackScreen() {
@@ -61,11 +62,27 @@ function TurnsStackScreen() {
     </TurnsStack.Navigator>
   );
 }
+const BarbershopStack = createNativeStackNavigator();
+function BarbershopStackScreen() {
+  return (
+    <BarbershopStack.Navigator>
+      <BarbershopStack.Screen
+        name="BarbershopScreen"
+        options={{
+          header: () => {
+            return null;
+          },
+        }}
+        component={MyBarbershop}
+      />
+    </BarbershopStack.Navigator>
+  );
+}
 
 const Tab = createBottomTabNavigator();
 
 function MyTabs() {
-  const {token} = useSelector(state => state.session);
+  const {token, role_id} = useSelector(state => state.session);
   return (
     <Tab.Navigator
       screenOptions={({route}) => ({
@@ -77,6 +94,9 @@ function MyTabs() {
               break;
             case 'Turns':
               iconName = 'schedule';
+              break;
+            case 'Barbershop':
+              iconName = 'content-cut';
               break;
             case 'Profile':
               iconName = 'person';
@@ -104,8 +124,18 @@ function MyTabs() {
         component={HomeStackScreen}
         options={{headerShown: false}}
       />
+      
       {token && (
         <>
+        {role_id === 1 && (
+        <Tab.Screen
+          style={{paddingBottom: 12}}
+          showLabel={false}
+          name="Barbershop"
+          component={BarbershopStackScreen}
+          options={{headerShown: false}}
+        />
+      )}
           <Tab.Screen
             style={{paddingBottom: 12}}
             showLabel={false}

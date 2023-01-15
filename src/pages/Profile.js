@@ -1,45 +1,44 @@
-import React, { useState, useEffect } from 'react'
-import { ActivityIndicator, View } from 'react-native'
-import { connect } from 'react-redux';
-import { setSuccess, setLoading } from '../actions/SessionActions'
-import { getMyProfile } from '../API';
+import React, {useState, useEffect} from 'react';
+import {ActivityIndicator, View} from 'react-native';
+import {connect} from 'react-redux';
+import {getMyProfile} from '../API';
 import Profile from '../containers/Profile';
-
-const ProfileScreen = (props) => {
-  const [dataUser, setDataUser] = useState({})
-
-  const callApiGetProfile = async (token) => {
-    const response = await getMyProfile(token)
-    setDataUser(response.data)
-  }
+import {setError} from '../actions/SessionActions';
+import {checkInternetConection} from '../utils';
+const ProfileScreen = props => {
+  const [dataUser, setDataUser] = useState({});
+  const [loading, setLoading] = useState(false);
+  const [trySubmit, setTrySubmit] = useState(false);
+  const callApiGetProfile = async () => {
+    try {
+      setLoading(true);
+      const internet = await checkInternetConection();
+      if (!internet) {
+        setError('Verifica tu conexión a internet');
+        setTrySubmit(!trySubmit);
+      } else {
+        const {token} = props;
+        const response = await getMyProfile(token);
+        setDataUser(response.data);
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    try {
-      const { token, role_id, user_id, setLoading, setSuccess } = props;
-      setLoading()
-      if (token && user_id && role_id) {
-        callApiGetProfile(token)
-      }
-      setSuccess()
-    } catch (error) {
-      console.log("Error: ", error);
-      setSuccess()
-    }
-  }, [])
+    callApiGetProfile();
+  }, [trySubmit]);
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }} >
-      {
-        props.isLoading ?
-          <ActivityIndicator />
-          :
-          <Profile {...dataUser} />
-      }
+    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+      {loading ? <ActivityIndicator /> : <Profile {...dataUser} />}
     </View>
   );
-}
+};
 
-
-function mapToProps({ session }) {
-  return session
+function mapToProps({session}) {
+  return session;
 }
-export default connect(mapToProps, { setSuccess, setLoading })(ProfileScreen);
+export default connect(mapToProps, {setError})(ProfileScreen);

@@ -124,7 +124,7 @@ export const getMyBarbershop = token => {
   console.log('API get My barbershop');
   return new Promise((resolve, rejected) => {
     axios
-      .get(`${API_HOST}/api/barbershops/barbershop/my-barbershop`, {
+      .get(`${API_HOST}/api/barbershops/my-barbershop`, {
         headers: {...headers, Authorization: 'Bearer ' + token},
       })
       .then(data => {
@@ -141,7 +141,7 @@ export const getMyProfile = token => {
   console.log('API get my profile');
   return new Promise((resolve, rejected) => {
     axios
-      .get(`${API_HOST}/api/auth/user/profile`, {
+      .get(`${API_HOST}/api/users/profile`, {
         headers: {...headers, Authorization: 'Bearer ' + token},
       })
       .then(data => {
@@ -274,7 +274,7 @@ export const createBarbershops = (
   });
   return new Promise((resolve, rejected) => {
     axios
-      .post(`${API_HOST}/api/auth/barbershops`, formData, {
+      .post(`${API_HOST}/api/barbershops`, formData, {
         headers: {...headers, Authorization: 'Bearer ' + token},
       })
       .then(data => {
@@ -310,7 +310,7 @@ export const createProducts = (
   });
   return new Promise((resolve, rejected) => {
     axios
-      .post(`${API_HOST}/api/auth/products`, formData, {
+      .post(`${API_HOST}/api/products`, formData, {
         headers: {
           ...headers,
           Authorization: 'Bearer ' + token,

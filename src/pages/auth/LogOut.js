@@ -39,7 +39,7 @@ const SignOut = props => {
       logOutApi();
     }
     setSuccess();
-    if (!isLoading && !token && !isLogged) props.navigation.navigate('Login');
+    if (!isLoading && !token && !isLogged) props.navigation.replace('AuthStack');
   }, [isLogged]);
   return (
     <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
