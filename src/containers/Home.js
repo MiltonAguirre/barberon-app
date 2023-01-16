@@ -1,14 +1,20 @@
 import React from 'react';
-import {Text, View, StyleSheet, ScrollView} from 'react-native';
+import {
+  Text,
+  View,
+  StyleSheet,
+  ActivityIndicator,
+} from 'react-native';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-import {LIGHT_COLOR} from '../utils/constants';
+import {DARK_COLOR, LIGHT_COLOR} from '../utils/constants';
 import BarberList from '../shares/BarberList';
 import Header from '../shares/Header';
 import Searcher from '../shares/Searcher';
 import Menu from '../shares/Menu';
+
 const Home = ({items, goToBarber, goToHome, setSearch, search, openDrawer}) => {
   return (
     <View style={styles.container}>
@@ -21,7 +27,23 @@ const Home = ({items, goToBarber, goToHome, setSearch, search, openDrawer}) => {
       />
       <Searcher search={search} onChange={setSearch} />
       <View style={{margin: hp('2.5%')}}>
-        <BarberList barbers={items} goToBarber={goToBarber} />
+        {!items ? (
+          <View
+            style={{
+              alignItems: 'center',
+              justifyContent: 'center',
+              width: '100%',
+            }}>
+            <ActivityIndicator
+              color={DARK_COLOR}
+              size="small"
+              style={{margin: 10}}
+            />
+            <Text style={styles.textData}>Cargando Barberias</Text>
+          </View>
+        ) : (
+          <BarberList barbers={items} goToBarber={goToBarber} />
+        )}
       </View>
     </View>
   );
@@ -34,5 +56,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: LIGHT_COLOR,
     width: wp('100%'),
+  },
+  textData: {
+    color: DARK_COLOR,
+    alignSelf: 'center',
+    marginVertical: hp('0.5%'),
   },
 });

@@ -15,7 +15,6 @@ const useBarbershops = () => {
         setError('Verifica tu conexión a internet');
       } else {
         const response = await getBarbershops();
-        console.log('Response: ', response);
         if (response.status == 200) {
           setBarbershops(response.data);
         }
