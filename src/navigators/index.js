@@ -39,7 +39,7 @@ const AuthStack = () => {
     </Stack.Navigator>
   );
 };
-const MainStack = ({navigation}) => {
+const MainStack = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen

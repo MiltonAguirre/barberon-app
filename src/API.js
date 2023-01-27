@@ -223,11 +223,11 @@ export const getBarbershopTurns = token => {
       });
   });
 };
-export const getMyProducts = token => {
-  console.log('API get my products');
+export const getProducts = ({token, barbershop_id}) => {
+  console.log('API get Products of barbershop ' + barbershop_id);
   return new Promise((resolve, rejected) => {
     axios
-      .get(`${API_HOST}/api/auth/products`, {
+      .get(`${API_HOST}/api/barbershops/products/${barbershop_id}`, {
         headers: {...headers, Authorization: 'Bearer ' + token},
       })
       .then(data => {
@@ -387,6 +387,24 @@ export const cancelUserTurn = (token, turn_id) => {
   return new Promise((resolve, rejected) => {
     axios
       .post(`${API_HOST}/api/auth/user/turns/cancel/${turn_id}`, {
+        headers: {...headers, Authorization: 'Bearer ' + token},
+      })
+      .then(data => {
+        resolve(data);
+      })
+      .catch(error => {
+        console.log('API ERROR: ');
+        console.log(error.message);
+        rejected(error);
+      });
+  });
+};
+//***Delete endpoints*****************************************//
+export const destroyProduct = (token, product_id) => {
+  console.log('API destroy product: ', product_id);
+  return new Promise((resolve, rejected) => {
+    axios
+      .delete(`${API_HOST}/api/barbershops/products/${product_id}`, {
         headers: {...headers, Authorization: 'Bearer ' + token},
       })
       .then(data => {

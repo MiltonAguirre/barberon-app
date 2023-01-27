@@ -3,39 +3,40 @@ import {API_HOST} from '../environment';
 import NetInfo from '@react-native-community/netinfo';
 import {PermissionsAndroid} from 'react-native';
 
-export const validateEmail = (email) => { //bassed on https://blog.mailtrap.io/react-native-email-validation/
-    const expression = /\S+@\S+\.\S+/;
-    if(!email || email.length<6 || !expression.test(String(email)))  return false;
-    else return true;
-}
-export const validateString = (string) => {
-  if (!string || string.length<3)
+export const validateEmail = email => {
+  //bassed on https://blog.mailtrap.io/react-native-email-validation/
+  const expression = /\S+@\S+\.\S+/;
+  if (!email || email.length < 6 || !expression.test(String(email)))
     return false;
+  else return true;
+};
+export const validateString = string => {
+  if (!string || string.length < 3) return false;
   return true;
-}
-export const validateLocation = (location) => {
+};
+export const validateLocation = location => {
   const expression = /^[A-Za-z0-9Ññ ]*$/u;
-  if(!location || location.length<3 || !expression.test(String(location)))  return false;
+  if (!location || location.length < 3 || !expression.test(String(location)))
+    return false;
   else return true;
-}
-export const validateName = (name) => {
+};
+export const validateName = name => {
   const expression = /^[A-Za-zÑñ ]*$/u;
-  if(!name || name.length<3 || !expression.test(String(name)))  return false;
+  if (!name || name.length < 3 || !expression.test(String(name))) return false;
   else return true;
-}
-export const validatePhone = (string) => {
-  if (!string || string.length<15 || string.length>30)  return false;
+};
+export const validatePhone = string => {
+  if (!string || string.length < 15 || string.length > 30) return false;
   else return true;
-}
+};
 export const validatePasswords = (pass, repass) => {
-  if (!pass || pass.length<8 || pass!==repass)  return false;
+  if (!pass || pass.length < 8 || pass !== repass) return false;
   else return true;
-}
+};
 
-export const getFullPathImage = (image) => {
+export const getFullPathImage = image => {
   return `${API_HOST}/storage/${image}`;
-}
-
+};
 
 export const optionsPhoto = {
   title: 'Please choise a picture',
@@ -75,10 +76,10 @@ export async function hasAndroidPermissionCamera() {
     return true;
   }
   const status = await PermissionsAndroid.request(permission, {
-    title: "App Camera Permission",
-    message: "The app needs access to your camera.",
-    buttonNegative: "Cancel",
-    buttonPositive: "OK"
+    title: 'App Camera Permission',
+    message: 'The app needs access to your camera.',
+    buttonNegative: 'Cancel',
+    buttonPositive: 'OK',
   });
   return status === 'granted';
 }
@@ -115,42 +116,28 @@ export const timeAgo = date => {
   }
   return Math.floor(seconds) + ' segundos';
 };
-export const timeOfLife = (dateBorn, datePhoto) => {
+/*
+export const calculate_age = dob => {
+  return Math.abs(new Date().getUTCFullYear() - dob.getUTCFullYear());
+};
+export const timeBetween = (dateBorn, datePhoto) => {
   const seconds = Math.abs(datePhoto.getTime() - dateBorn.getTime()) / 1000;
   interval = Math.floor(seconds / 604800);
   if (interval > 1) {
-    return interval + ' semanas';
+    return interval + ' weeks';
   }
   interval = Math.floor(seconds / 86400);
   if (interval > 1) {
-    return interval + ' dias';
+    return interval + ' days';
   }
   interval = Math.floor(seconds / 3600);
   if (interval > 1) {
-    return interval + ' horas';
+    return interval + ' hours';
   }
   interval = Math.floor(seconds / 60);
   if (interval > 1) {
-    return interval + ' minutos';
+    return interval + ' minutes';
   }
   return 'El primer instante';
 };
-
-// export const checkInternetConection = () => {
-//   return new Promise((resolve,reject) => {
-//     return NetInfo.fetch().then(state => {
-//       resolve(state.isConnected);
-//     }).catch( (error) => {
-//       console.log("CHECK NETWORK ERROR ")
-//       rejected();
-//     });
-//   })
-// }
-
-
-
-// export function calculate_age(dob) {  // bassed on https://www.w3resource.com/javascript-exercises/javascript-date-exercise-18.php
-//   var diff_ms = Date.now() - dob.getTime();
-//   var age_dt = new Date(diff_ms); 
-//   return Math.abs(age_dt.getUTCFullYear() - 1970);
-// }
+*/

@@ -3,12 +3,11 @@ import {View} from 'react-native';
 import {createTurn} from '../API';
 import BarberShop from '../containers/Barbershop';
 
-const BarbershopScreen = ({navigation, role_id, route}) => {
+const BarbershopScreen = ({navigation, route}) => {
   const {barbershop} = route.params;
+  con
   const newTurn = async (product_id, start) => {
-    if (!myRole) {
-      const {token, setLoading, setSuccess} = props;
-      setLoading(true);
+    if (!role_id) {
       try {
         const response = await createTurn(token, product_id, start);
         console.log(response);
@@ -17,9 +16,8 @@ const BarbershopScreen = ({navigation, role_id, route}) => {
         }
         setSuccess();
       } catch (error) {
-      } finally {
-        setLoading(false);
-      }
+        console.log(error);
+      } 
     }
   };
   const goToHome = () => {

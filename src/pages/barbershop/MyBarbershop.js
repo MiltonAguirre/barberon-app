@@ -70,7 +70,11 @@ const MyBarbershop = ({navigation, token}) => {
     }
   };
   const goToMyProducts = () => {
-    navigation.navigate('MyProducts');
+    if (!barbershop) {
+      Alert.alert("Ups, algo salió mal", "Lo sentimos, intentelo más tarde")
+    }else{
+      navigation.navigate('MyProducts', {barbershop_id: barbershop.id});
+    }
   };
 
   const goToHome = () => {

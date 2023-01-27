@@ -13,6 +13,7 @@ import Home from '../pages/Home';
 import Profile from '../pages/Profile';
 import Turns from '../pages/Turns';
 import MyBarbershop from '../pages/barbershop/MyBarbershop';
+import MyProducts from '../pages/barbershop/MyProducts';
 
 const HomeStack = createNativeStackNavigator();
 function HomeStackScreen() {
@@ -63,7 +64,7 @@ function TurnsStackScreen() {
   );
 }
 const BarbershopStack = createNativeStackNavigator();
-function BarbershopStackScreen() {
+function MyBarbershopStackScreen() {
   return (
     <BarbershopStack.Navigator>
       <BarbershopStack.Screen
@@ -74,6 +75,15 @@ function BarbershopStackScreen() {
           },
         }}
         component={MyBarbershop}
+      />
+      <BarbershopStack.Screen
+        name="MyProducts"
+        options={{
+          header: () => {
+            return null;
+          },
+        }}
+        component={MyProducts}
       />
     </BarbershopStack.Navigator>
   );
@@ -95,7 +105,7 @@ function MyTabs() {
             case 'Turns':
               iconName = 'schedule';
               break;
-            case 'Barbershop':
+            case 'MyBarbershop':
               iconName = 'content-cut';
               break;
             case 'Profile':
@@ -124,18 +134,18 @@ function MyTabs() {
         component={HomeStackScreen}
         options={{headerShown: false}}
       />
-      
+
       {token && (
         <>
-        {role_id === 1 && (
-        <Tab.Screen
-          style={{paddingBottom: 12}}
-          showLabel={false}
-          name="Barbershop"
-          component={BarbershopStackScreen}
-          options={{headerShown: false}}
-        />
-      )}
+          {role_id === 1 && (
+            <Tab.Screen
+              style={{paddingBottom: 12}}
+              showLabel={false}
+              name="MyBarbershop"
+              component={MyBarbershopStackScreen}
+              options={{headerShown: false}}
+            />
+          )}
           <Tab.Screen
             style={{paddingBottom: 12}}
             showLabel={false}
