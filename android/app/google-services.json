@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "539231358747",
+    "project_id": "barberon-api",
+    "storage_bucket": "barberon-api.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:539231358747:android:c5e359b1b8f2b62fec0dbe",
+        "android_client_info": {
+          "package_name": "com.barberonapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "539231358747-pm3npk1hpqd6biojtficfmivsvf0fpq1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAhdbAkpy4_R9n5DXIn1wCiP_FrIrDs51g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "539231358747-pm3npk1hpqd6biojtficfmivsvf0fpq1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
