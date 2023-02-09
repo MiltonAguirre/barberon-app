@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { Button, Icon } from 'react-native-elements'
-import { API_HOST } from '../environment'
+import { API_HOST } from '@env'
 import { PRIMARY_COLOR, SECONDARY_COLOR } from '../utils/constants';
 
 import {

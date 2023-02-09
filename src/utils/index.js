@@ -1,5 +1,5 @@
 // import NetInfo from '@react-native-community/netinfo';
-import {API_HOST} from '../environment';
+import {API_HOST} from '@env';
 import NetInfo from '@react-native-community/netinfo';
 import {PermissionsAndroid} from 'react-native';
 

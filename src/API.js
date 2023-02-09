@@ -1,4 +1,4 @@
-import {API_HOST} from './environment';
+import {API_HOST} from '@env';
 import axios from 'axios';
 const headers = {
   'Content-Type': 'application/json;',
@@ -51,7 +51,7 @@ export const signUp = (
   });
 };
 export const login = (email, password) => {
-  console.log('API login');
+  console.log('API login: ', email, password);
   const formData = new FormData();
   formData.append('email', email);
   formData.append('password', password);
@@ -85,58 +85,30 @@ export const logout = token => {
       });
   });
 };
+export const registerTokenDevice = (token, fcm_token) => {
+  console.log('API Register Token device: ', fcm_token);
+
+  return new Promise((resolve, reject) => {
+    axios
+      .post(
+        `${API_HOST}/api/users/token-device`,
+        {fcm_token},
+        {
+          headers: {...headers, Authorization: 'Bearer ' + token},
+        },
+      )
+      .then(data => {
+        resolve(data);
+      })
+      .catch(error => {
+        console.log('API ERROR: ');
+        console.log(error.message);
+        reject(error);
+      });
+  });
+};
 //***Get data endpoints*****************************************//
-export const getBarbershops = () => {
-  console.log('API get barbershops');
-  return new Promise((resolve, rejected) => {
-    axios
-      .get(`${API_HOST}/api/barbershops`, {
-        headers,
-      })
-      .then(data => {
-        resolve(data);
-      })
-      .catch(error => {
-        console.log('API ERROR: ');
-        console.log(error.message);
-        rejected(error);
-      });
-  });
-};
-export const getBarbershop = barbershop_id => {
-  console.log('API get barbershop');
-  return new Promise((resolve, rejected) => {
-    axios
-      .get(`${API_HOST}/api/barbershops/${barbershop_id}`, {
-        headers,
-      })
-      .then(data => {
-        resolve(data);
-      })
-      .catch(error => {
-        console.log('API ERROR: ');
-        console.log(error.message);
-        rejected(error);
-      });
-  });
-};
-export const getMyBarbershop = token => {
-  console.log('API get My barbershop');
-  return new Promise((resolve, rejected) => {
-    axios
-      .get(`${API_HOST}/api/barbershops/my-barbershop`, {
-        headers: {...headers, Authorization: 'Bearer ' + token},
-      })
-      .then(data => {
-        resolve(data);
-      })
-      .catch(error => {
-        console.log('API ERROR: ');
-        console.log(error.message);
-        rejected(error);
-      });
-  });
-};
+
 export const getMyProfile = token => {
   console.log('API get my profile');
   return new Promise((resolve, rejected) => {
@@ -188,6 +160,44 @@ export const getUserTurns = token => {
       });
   });
 };
+export const createTurn = (token, product_id, start) => {
+  console.log('API create turn');
+  const formData = new FormData();
+  formData.append('start', start);
+  formData.append('product_id', product_id);
+  console.log(formData);
+  return new Promise((resolve, rejected) => {
+    axios
+      .post(`${API_HOST}/api/auth/user/turns`, formData, {
+        headers: {...headers, Authorization: 'Bearer ' + token},
+      })
+      .then(data => {
+        resolve(data);
+      })
+      .catch(error => {
+        console.log('API ERROR: ');
+        console.log(error.message);
+        rejected(error);
+      });
+  });
+};
+export const cancelUserTurn = (token, turn_id) => {
+  console.log('API cancel turn as user');
+  return new Promise((resolve, rejected) => {
+    axios
+      .post(`${API_HOST}/api/auth/user/turns/cancel/${turn_id}`, {
+        headers: {...headers, Authorization: 'Bearer ' + token},
+      })
+      .then(data => {
+        resolve(data);
+      })
+      .catch(error => {
+        console.log('API ERROR: ');
+        console.log(error.message);
+        rejected(error);
+      });
+  });
+};
 /*export const getTurn = (token, turn_id) => {
     console.log("API get turn");
     return new Promise((resolve, rejected) => {
@@ -206,6 +216,57 @@ export const getUserTurns = token => {
     })
 }
 */
+export const getBarbershops = () => {
+  console.log('API get barbershops');
+  return new Promise((resolve, rejected) => {
+    axios
+      .get(`${API_HOST}/api/barbershops`, {
+        headers,
+      })
+      .then(data => {
+        resolve(data);
+      })
+      .catch(error => {
+        console.log('API ERROR: ');
+        console.log(error.message);
+        rejected(error);
+      });
+  });
+};
+export const getBarbershop = barbershop_id => {
+  console.log('API get barbershop');
+  return new Promise((resolve, rejected) => {
+    axios
+      .get(`${API_HOST}/api/barbershops/${barbershop_id}`, {
+        headers,
+      })
+      .then(data => {
+        resolve(data);
+      })
+      .catch(error => {
+        console.log('API ERROR: ');
+        console.log(error.message);
+        rejected(error);
+      });
+  });
+};
+export const getMyBarbershop = token => {
+  console.log('API get My barbershop');
+  return new Promise((resolve, rejected) => {
+    axios
+      .get(`${API_HOST}/api/barbershops/my-barbershop`, {
+        headers: {...headers, Authorization: 'Bearer ' + token},
+      })
+      .then(data => {
+        resolve(data);
+      })
+      .catch(error => {
+        console.log('API ERROR: ');
+        console.log(error.message);
+        rejected(error);
+      });
+  });
+};
 export const getBarbershopTurns = token => {
   console.log('API get barbershop turns');
   return new Promise((resolve, rejected) => {
@@ -223,24 +284,6 @@ export const getBarbershopTurns = token => {
       });
   });
 };
-export const getProducts = ({token, barbershop_id}) => {
-  console.log('API get Products of barbershop ' + barbershop_id);
-  return new Promise((resolve, rejected) => {
-    axios
-      .get(`${API_HOST}/api/barbershops/products/${barbershop_id}`, {
-        headers: {...headers, Authorization: 'Bearer ' + token},
-      })
-      .then(data => {
-        resolve(data);
-      })
-      .catch(error => {
-        console.log('API ERROR: ');
-        console.log(error.message);
-        rejected(error);
-      });
-  });
-};
-//***Post data endpoints*****************************************//
 export const createBarbershops = (
   token,
   name,
@@ -287,6 +330,24 @@ export const createBarbershops = (
       });
   });
 };
+export const getProducts = (token, barbershop_id) => {
+  console.log('API get Products of barbershop ' + barbershop_id);
+  return new Promise((resolve, rejected) => {
+    axios
+      .get(`${API_HOST}/api/barbershops/products/${barbershop_id}`, {
+        headers: {...headers, Authorization: 'Bearer ' + token},
+      })
+      .then(data => {
+        resolve(data);
+      })
+      .catch(error => {
+        console.log('API ERROR: ');
+        console.log(error.message);
+        rejected(error);
+      });
+  });
+};
+
 export const createProducts = (
   token,
   name,
@@ -316,6 +377,23 @@ export const createProducts = (
           Authorization: 'Bearer ' + token,
           'Content-type': 'multipart/form-data',
         },
+      })
+      .then(data => {
+        resolve(data);
+      })
+      .catch(error => {
+        console.log('API ERROR: ');
+        console.log(error.message);
+        rejected(error);
+      });
+  });
+};
+export const destroyProduct = (token, product_id) => {
+  console.log('API destroy product: ', product_id);
+  return new Promise((resolve, rejected) => {
+    axios
+      .delete(`${API_HOST}/api/barbershops/products/${product_id}`, {
+        headers: {...headers, Authorization: 'Bearer ' + token},
       })
       .then(data => {
         resolve(data);
@@ -361,59 +439,4 @@ export const cancelBarbershopTurn = (token, turn_id) => {
       });
   });
 };
-export const createTurn = (token, product_id, start) => {
-  console.log('API create turn');
-  const formData = new FormData();
-  formData.append('start', start);
-  formData.append('product_id', product_id);
-  console.log(formData);
-  return new Promise((resolve, rejected) => {
-    axios
-      .post(`${API_HOST}/api/auth/user/turns`, formData, {
-        headers: {...headers, Authorization: 'Bearer ' + token},
-      })
-      .then(data => {
-        resolve(data);
-      })
-      .catch(error => {
-        console.log('API ERROR: ');
-        console.log(error.message);
-        rejected(error);
-      });
-  });
-};
-export const cancelUserTurn = (token, turn_id) => {
-  console.log('API cancel turn as user');
-  return new Promise((resolve, rejected) => {
-    axios
-      .post(`${API_HOST}/api/auth/user/turns/cancel/${turn_id}`, {
-        headers: {...headers, Authorization: 'Bearer ' + token},
-      })
-      .then(data => {
-        resolve(data);
-      })
-      .catch(error => {
-        console.log('API ERROR: ');
-        console.log(error.message);
-        rejected(error);
-      });
-  });
-};
 //***Delete endpoints*****************************************//
-export const destroyProduct = (token, product_id) => {
-  console.log('API destroy product: ', product_id);
-  return new Promise((resolve, rejected) => {
-    axios
-      .delete(`${API_HOST}/api/barbershops/products/${product_id}`, {
-        headers: {...headers, Authorization: 'Bearer ' + token},
-      })
-      .then(data => {
-        resolve(data);
-      })
-      .catch(error => {
-        console.log('API ERROR: ');
-        console.log(error.message);
-        rejected(error);
-      });
-  });
-};

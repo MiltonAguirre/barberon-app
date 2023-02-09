@@ -37,7 +37,7 @@ const SignInForm = ({goToSignUp, submit, isError, goToHome, loading}) => {
         {isError && (
           <View style={styles.errorContainer}>
             <Text style={styles.errorText}>
-              Verifica tus credenciales y conexión a internet
+              {isError}
             </Text>
           </View>
         )}
