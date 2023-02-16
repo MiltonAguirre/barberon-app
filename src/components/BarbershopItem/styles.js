@@ -34,11 +34,11 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: '700',
     padding: 5,
-    color: DARK_COLOR,
+    color: SECONDARY_COLOR,
     textTransform: 'uppercase',
   },
   subtitleCard: {
-    color: PRIMARY_COLOR,
+    color: LIGHT_COLOR,
     fontSize: 12,
   },
   messageEmpty: {
@@ -47,8 +47,8 @@ const styles = StyleSheet.create({
     marginVertical: hp('1.5%'),
   },
   texts: {
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
     width: wp('55%'),
   },
   icons: {

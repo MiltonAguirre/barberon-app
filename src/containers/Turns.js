@@ -14,6 +14,7 @@ import {
   LIGHT_COLOR,
   PRIMARY_COLOR,
   SECONDARY_COLOR,
+  THIRD_COLOR,
 } from '../utils/constants';
 import Header from '../shares/Header';
 import Turn from '../components/Turn';
@@ -59,9 +60,9 @@ const Turns = ({
               <LinearGradient
                 start={{x: 0, y: 0}}
                 end={{x: 1, y: 1}}
-                colors={['white', LIGHT_COLOR, SECONDARY_COLOR]}
+                colors={[ LIGHT_COLOR,'white']}
                 key={st}
-                style={[styles.slideContainer, styles.slide]}>
+                style={[styles.slideContainer]}>
                 <View style={[styles.rowCardHead]}>
                   <View
                     style={{justifyContent: 'center', alignItems: 'center'}}>
@@ -119,15 +120,17 @@ const styles = StyleSheet.create({
 
   slideContainer: {
     alignItems: 'center',
+    justifyContent: 'flex-start',
     padding: 5,
-    margin: 5,
-    width: wp('90%'),
-  },
-  slide: {
-    borderRadius: 10,
     margin: wp('2.5%'),
     marginTop: 0,
-    justifyContent: 'flex-start',
+    width: wp('90%'),
+    borderRadius: 12,
+    shadowColor:PRIMARY_COLOR,
+    shadowOffset:{width: 1, height: 1},
+    shadowOpacity:.75,
+    shadowRadius: 10,
+    elevation:2
   },
   scroll: {
     padding: 10,
@@ -145,7 +148,7 @@ const styles = StyleSheet.create({
   },
   titleCardHead: {
     fontSize: 20,
-    color: PRIMARY_COLOR,
+    color: DARK_COLOR,
     padding: 4,
     letterSpacing: 1.2,
     fontWeight: 'bold',

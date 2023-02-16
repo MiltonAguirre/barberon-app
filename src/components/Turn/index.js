@@ -3,6 +3,7 @@ import {View, TouchableOpacity} from 'react-native';
 import {Text, Icon, Badge} from 'react-native-elements';
 import LinearGradient from 'react-native-linear-gradient';
 import {
+  DARK_COLOR,
   LIGHT_COLOR,
   PRIMARY_COLOR,
   SECONDARY_COLOR,
@@ -32,15 +33,15 @@ const Turn = ({
       <LinearGradient
         start={{x: 0, y: 0}}
         end={{x: 1, y: 1}}
-        colors={[LIGHT_COLOR, SECONDARY_COLOR]}
+        colors={[DARK_COLOR, PRIMARY_COLOR]}
         style={styles.card}>
         <TouchableOpacity
           style={{flex: 1, alignSelf: 'flex-start', padding: 5, width: '85%'}}
           onPress={() => console.log('Now will open turn')}>
           {rows.map((row, index) => (
             <View style={styles.row} key={index}>
-              <Icon key={index} name={row.icon} color={PRIMARY_COLOR} />
-              <Text style={[!index && {fontWeight: 'bold'}, styles.titleCard]}>
+              <Icon key={index} name={row.icon} color={SECONDARY_COLOR} iconStyle={{marginHorizontal:5}}/>
+              <Text style={[!index ? styles.titleCard: styles.subtitleCard]}>
                 {row.title}
               </Text>
             </View>
