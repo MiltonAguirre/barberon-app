@@ -17,7 +17,7 @@ const BarberShop = ({
   country,
   products,
   goBack,
-  newTurn,
+  saveTurn,
   myRole,
 }) => {
   const [visible, setVisible] = React.useState(false);
@@ -88,7 +88,7 @@ const BarberShop = ({
             {products && visible && (
               <ProductsList
                 products={products}
-                newTurn={newTurn}
+                saveTurn={saveTurn}
                 myRole={myRole}
               />
             )}
@@ -106,25 +106,24 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     backgroundColor: LIGHT_COLOR,
-    width: wp('100%'),
   },
   card: {
-    width: wp('90%'),
+    width: wp('95%'),
     alignItems: 'center',
-    padding: hp('2.5%'),
-    borderRadius: wp('2.5%'),
+    padding: 10,
+    borderRadius: 12,
     backgroundColor: LIGHT_COLOR,
     borderColor: '#FFF',
     borderWidth: 2,
     elevation: 3,
-    marginVertical: hp('2.5%'),
+    marginVertical: 5,
   },
   title: {
-    fontSize: 45,
+    fontSize: 35,
     fontWeight: 'bold',
     color: LIGHT_COLOR,
     textTransform: 'uppercase',
-    paddingVertical: 10,
+    paddingVertical: 4,
     textShadowColor: 'rgba(90, 90, 90, .75)',
     textShadowOffset: {width: 1, height: 1},
     textShadowRadius: 1,
@@ -149,9 +148,8 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   productsLink: {
-    marginVertical: hp('1%'),
-    width: wp('50%'),
-    paddingVertical: hp('.5%'),
+    marginVertical: 5,
+    paddingVertical: 2,
     borderTopWidth: 1,
     borderTopColor: PRIMARY_COLOR,
     justifyContent: 'center',

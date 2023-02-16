@@ -1,31 +1,36 @@
 import React from 'react';
-import { View } from 'react-native';
-import { Icon, Text} from 'react-native-elements'
-import { DARK_COLOR, LIGHT_COLOR, PRIMARY_COLOR, SECONDARY_COLOR } from '../utils/constants';
-import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import {View} from 'react-native';
+import {Icon, Text} from 'react-native-elements';
+import {
+  DARK_COLOR,
+  LIGHT_COLOR,
+  PRIMARY_COLOR,
+  SECONDARY_COLOR,
+} from '../utils/constants';
 
-
-const ItemMenu = ({focused,name, nameIcon}) => {
-    return (
-      <View style={{flexDirection: 'row', alignItems:'center'}} >
-        <Icon
+const ItemMenu = ({focused, name, nameIcon}) => {
+  return (
+    <View style={{flexDirection: 'row', alignItems: 'center'}}>
+      <Icon
         name={nameIcon}
-        size={hp('3.25%')}
-        color={focused ? PRIMARY_COLOR : LIGHT_COLOR}
-        />
-        {
-          focused ? 
-          (
-            <Text style={{color: LIGHT_COLOR, fontWeight:'700',fontSize: hp('2.5%'), }} > {name}</Text>
-          )
-          :
-          (
-            <Text style={{color: LIGHT_COLOR, fontSize: hp('2.25%')}} > {name}</Text>
-          )
-        }
+        size={24}
+        color={focused ? SECONDARY_COLOR : LIGHT_COLOR}
+      />
+      {focused ? (
+        <Text
+          style={{
+            color: SECONDARY_COLOR,
+            fontWeight: '700',
+            fontSize: 18,
+          }}>
+          {' '}
+          {name}
+        </Text>
+      ) : (
+        <Text style={{color: LIGHT_COLOR, fontSize: 16}}> {name}</Text>
+      )}
+    </View>
+  );
+};
 
-      </View>
-    )
-  }
-
-  export default ItemMenu;
+export default ItemMenu;

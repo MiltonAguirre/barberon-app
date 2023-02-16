@@ -51,7 +51,7 @@ export const signUp = (
   });
 };
 export const login = (email, password) => {
-  console.log('API login: ', email, password);
+  console.log('API login');
   const formData = new FormData();
   formData.append('email', email);
   formData.append('password', password);
@@ -147,7 +147,7 @@ export const getUserTurns = token => {
   console.log('API get user turns');
   return new Promise((resolve, rejected) => {
     axios
-      .get(`${API_HOST}/api/auth/user/turns`, {
+      .get(`${API_HOST}/api/users/turns`, {
         headers: {...headers, Authorization: 'Bearer ' + token},
       })
       .then(data => {
@@ -168,7 +168,7 @@ export const createTurn = (token, product_id, start) => {
   console.log(formData);
   return new Promise((resolve, rejected) => {
     axios
-      .post(`${API_HOST}/api/auth/user/turns`, formData, {
+      .post(`${API_HOST}/api/users/turns`, formData, {
         headers: {...headers, Authorization: 'Bearer ' + token},
       })
       .then(data => {
@@ -185,7 +185,7 @@ export const cancelUserTurn = (token, turn_id) => {
   console.log('API cancel turn as user');
   return new Promise((resolve, rejected) => {
     axios
-      .post(`${API_HOST}/api/auth/user/turns/cancel/${turn_id}`, {
+      .post(`${API_HOST}/api/users/turns/cancel/${turn_id}`, {
         headers: {...headers, Authorization: 'Bearer ' + token},
       })
       .then(data => {
@@ -198,11 +198,11 @@ export const cancelUserTurn = (token, turn_id) => {
       });
   });
 };
-/*export const getTurn = (token, turn_id) => {
+export const getTurn = (token, turn_id) => {
     console.log("API get turn");
     return new Promise((resolve, rejected) => {
         axios
-            .get(`${API_HOST}/api/auth/turns/turn/${turn_id}`, {
+            .get(`${API_HOST}/api/users/turns/show/${turn_id}`, {
                 headers: { ...headers, 'Authorization': 'Bearer ' + token }
             })
             .then((data) => {
@@ -215,7 +215,6 @@ export const cancelUserTurn = (token, turn_id) => {
             })
     })
 }
-*/
 export const getBarbershops = () => {
   console.log('API get barbershops');
   return new Promise((resolve, rejected) => {
@@ -271,7 +270,7 @@ export const getBarbershopTurns = token => {
   console.log('API get barbershop turns');
   return new Promise((resolve, rejected) => {
     axios
-      .get(`${API_HOST}/api/auth/barbershops/turns/all`, {
+      .get(`${API_HOST}/api/barbershops/turns/all`, {
         headers: {...headers, Authorization: 'Bearer ' + token},
       })
       .then(data => {
@@ -409,7 +408,7 @@ export const acceptTurn = (token, turn_id) => {
   console.log('API accept turn as barber');
   return new Promise((resolve, rejected) => {
     axios
-      .post(`${API_HOST}/api/auth/barbershops/turns/accept/${turn_id}`, {
+      .post(`${API_HOST}/api/auth/barbershops/turns/accept`, {turn_id}, {
         headers: {...headers, Authorization: 'Bearer ' + token},
       })
       .then(data => {

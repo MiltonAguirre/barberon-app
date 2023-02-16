@@ -12,7 +12,7 @@ const SignInForm = ({goToSignUp, submit, isError, goToHome, loading}) => {
   };
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>BarberON</Text>
+      <Text style={styles.title}>HairHUB</Text>
       <Text style={styles.subtitle}>Barberias a tu alcance</Text>
       <View style={styles.card}>
         <TextInput

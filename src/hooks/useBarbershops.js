@@ -1,13 +1,10 @@
 import {useState, useEffect} from 'react';
 import {getBarbershops} from '../API';
 import {checkInternetConection} from '../utils';
-import {useNavigation} from '@react-navigation/native';
 
 const useBarbershops = () => {
   const [barbershops, setBarbershops] = useState(null);
   const [error, setError] = useState('');
-  const navigation = useNavigation();
-
   const apiGetBarbershops = async () => {
     try {
       const internet = await checkInternetConection();
@@ -26,10 +23,7 @@ const useBarbershops = () => {
   };
 
   useEffect(() => {
-    const unsubscribe = navigation.addListener('focus', () => {
-      apiGetBarbershops();
-    });
-    return unsubscribe;
+    apiGetBarbershops();
   }, []);
 
   return {barbershops, error};

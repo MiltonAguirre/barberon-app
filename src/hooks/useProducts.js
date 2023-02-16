@@ -5,11 +5,13 @@ import {useNavigation} from '@react-navigation/native';
 import {useSelector} from 'react-redux';
 
 const useProducts = barbershop_id => {
+  const [loading, setLoading] = useState(false);
   const [products, setProducts] = useState(null);
   const navigation = useNavigation();
   const {token} = useSelector(state => state.session);
   const apiGetProducts = async () => {
     try {
+      setLoading(true);
       const internet = await checkInternetConection();
       if (!internet) {
         console.error('Verify network connection failed');
@@ -21,6 +23,8 @@ const useProducts = barbershop_id => {
       }
     } catch (err) {
       console.error('CATCH ERROR useProducts: ', err);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -32,6 +36,7 @@ const useProducts = barbershop_id => {
   }, []);
   const deleteProduct = async id => {
     try {
+      setLoading(true);
       const internet = await checkInternetConection();
       if (!internet) {
         console.error('Verify network connection failed');
@@ -43,6 +48,8 @@ const useProducts = barbershop_id => {
       }
     } catch (error) {
       console.error('Catch error New product: ', error);
+    } finally {
+      setLoading(false);
     }
   };
   const newProduct = async ({
@@ -54,6 +61,7 @@ const useProducts = barbershop_id => {
     photo,
   }) => {
     try {
+      setLoading(true);
       const internet = await checkInternetConection();
       if (!internet || !token) {
         console.error('Verify network connection failed');
@@ -73,9 +81,11 @@ const useProducts = barbershop_id => {
       }
     } catch (error) {
       console.error('Catch error New product: ', error);
+    } finally {
+      setLoading(false);
     }
   };
-  return {products, deleteProduct, newProduct};
+  return {products, deleteProduct, newProduct, loading};
 };
 
 export default useProducts;

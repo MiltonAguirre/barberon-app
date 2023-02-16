@@ -1,7 +1,12 @@
 import React from 'react';
 import {Linking, StyleSheet, View} from 'react-native';
 import {Icon} from 'react-native-elements';
-import {PRIMARY_COLOR, LIGHT_COLOR, DARK_COLOR} from '../utils/constants';
+import {
+  PRIMARY_COLOR,
+  LIGHT_COLOR,
+  DARK_COLOR,
+  SECONDARY_COLOR,
+} from '../utils/constants';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -104,11 +109,10 @@ const MyDrawer = props => {
           token={token}
         />
       )}
-      drawerStyle={styles.menu}
       screenOptions={{
         headerShown: false,
         drawerStyle: {
-          backgroundColor: DARK_COLOR,
+          backgroundColor: LIGHT_COLOR,
           width: 240,
         },
       }}>
@@ -117,7 +121,8 @@ const MyDrawer = props => {
           drawerLabel: ({focused}) => (
             <ItemMenu name="Inicio" nameIcon="home" focused={focused} />
           ),
-          activeTintColor: LIGHT_COLOR,
+          activeTintColor: SECONDARY_COLOR,
+          drawerActiveBackgroundColor: DARK_COLOR
         }}
         name="TabHome"
         component={TabHome}
@@ -127,16 +132,10 @@ const MyDrawer = props => {
 };
 
 const styles = StyleSheet.create({
-  menu: {
-    backgroundColor: DARK_COLOR,
-    opacity: 1,
-    height: hp('100%'),
-    width: wp('60%'),
-    paddingVertical: hp('2.5%'),
-  },
   label: {
-    color: LIGHT_COLOR,
-    fontSize: hp('2%'),
+    color: DARK_COLOR,
+    fontSize: 16,
+    textAlign: 'left',
   },
 });
 function mapStateToProps({session}) {

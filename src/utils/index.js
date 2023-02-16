@@ -3,6 +3,20 @@ import {API_HOST} from '@env';
 import NetInfo from '@react-native-community/netinfo';
 import {PermissionsAndroid} from 'react-native';
 
+export const checkIdOpen = (schedules, days) => {
+  const now = new Date();
+  let days_array = days.split(',');
+  const now_wday = now.getDay();
+  let res = false;
+  if (days_array[now_wday]) {
+    schedules.forEach(schedule => {
+      if (schedule.open <= now.getHours() && schedule.close > now.getHours()) {
+        res = true;
+      }
+    });
+  }
+  return res;
+};
 export const validateEmail = email => {
   //bassed on https://blog.mailtrap.io/react-native-email-validation/
   const expression = /\S+@\S+\.\S+/;

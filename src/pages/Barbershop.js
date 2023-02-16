@@ -1,25 +1,14 @@
 import React from 'react';
 import {View} from 'react-native';
-import {createTurn} from '../API';
+import {useSelector} from 'react-redux';
 import BarberShop from '../containers/Barbershop';
-
+import useProducts from '../hooks/useProducts';
+import useTurns from '../hooks/useTurns';
 const BarbershopScreen = ({navigation, route}) => {
   const {barbershop} = route.params;
-  con
-  const newTurn = async (product_id, start) => {
-    if (!role_id) {
-      try {
-        const response = await createTurn(token, product_id, start);
-        console.log(response);
-        if (response && response.status === 200) {
-          navigation.navigate('Turns');
-        }
-        setSuccess();
-      } catch (error) {
-        console.log(error);
-      } 
-    }
-  };
+  const {products} = useProducts(barbershop.id);
+  const {role_id} = useSelector(state => state.session);
+  const {saveTurn} = useTurns();
   const goToHome = () => {
     navigation.navigate('Home');
   };
@@ -27,8 +16,9 @@ const BarbershopScreen = ({navigation, route}) => {
     <View style={{flex: 1, backgroundColor: '#FFF'}}>
       <BarberShop
         {...barbershop}
+        products={products}
         goBack={goToHome}
-        newTurn={newTurn}
+        saveTurn={saveTurn}
         myRole={role_id}
       />
     </View>

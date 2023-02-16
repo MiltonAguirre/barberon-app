@@ -1,25 +1,20 @@
 import React, {useState} from 'react';
 import {Text, View, StyleSheet} from 'react-native';
 import {Button, Icon} from 'react-native-elements';
+import ProductsList from '../../shares/MyProductsList';
+import Header from '../../shares/Header';
+import NewProductForm from './NewProduct';
+import {PRIMARY_COLOR, DARK_COLOR, LIGHT_COLOR} from '../../utils/constants';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-import {PRIMARY_COLOR, DARK_COLOR, LIGHT_COLOR} from '../../utils/constants';
-import ProductsList from '../../shares/MyProductsList';
-import NewProductForm from './NewProduct';
-import Header from '../../shares/Header';
 
 const Products = ({products, newProduct, goBack, deleteProduct}) => {
   const [visible, setVisible] = useState(false);
   const toggleModal = () => {
     setVisible(!visible);
   };
-  /*const [editVisible, setEditVisible] = useState(false);
-  const toggleModalEdit = () => {
-    setEditVisible(!editVisible);
-  };*/
-
   const submit = (name, price, description, hours, minutes, image) => {
     toggleModal();
     newProduct(name, price, description, hours, minutes, image);
@@ -63,7 +58,7 @@ const Products = ({products, newProduct, goBack, deleteProduct}) => {
         visible={visible}
       />
       {products && products.length ? (
-        <ProductsList products={products} deleteProduct={deleteProduct}/>
+        <ProductsList products={products} deleteProduct={deleteProduct} />
       ) : (
         <Text
           style={{
@@ -92,7 +87,7 @@ const styles = StyleSheet.create({
   title: {
     paddingHorizontal: 8,
     paddingBottom: 4,
-    fontSize:36,
+    fontSize: 36,
     fontWeight: 'bold',
     color: LIGHT_COLOR,
     textTransform: 'uppercase',
@@ -104,7 +99,7 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-end',
     backgroundColor: PRIMARY_COLOR,
     borderRadius: 24,
-    marginHorizontal:10,
-    marginBottom:5,
+    marginHorizontal: 10,
+    marginBottom: 5,
   },
 });

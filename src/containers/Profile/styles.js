@@ -3,13 +3,13 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-import {PRIMARY_COLOR, DARK_COLOR, LIGHT_COLOR} from '../../utils/constants';
+import {PRIMARY_COLOR, DARK_COLOR, LIGHT_COLOR, SECONDARY_COLOR} from '../../utils/constants';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    backgroundColor: LIGHT_COLOR,
+    backgroundColor: 'white',
     width: wp('100%'),
   },
   row: {
@@ -17,11 +17,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   rowData: {
-    marginVertical: hp('.5%'),
-    paddingHorizontal: wp('.5%'),
+    marginVertical: 4,
+    paddingHorizontal: 4,
   },
   title: {
-    fontSize: hp('5%'),
+    fontSize: 36,
     fontWeight: 'bold',
     color: LIGHT_COLOR,
     textTransform: 'uppercase',
@@ -31,10 +31,10 @@ const styles = StyleSheet.create({
     textShadowRadius: 1,
   },
   subtitle: {
-    fontSize: hp('2.8%'),
+    fontSize: 18,
     fontWeight: '700',
-    color: PRIMARY_COLOR,
-    marginBottom: hp('1.2%'),
+    color: SECONDARY_COLOR,
+    marginBottom: 5
   },
   imageSide: {
     width: wp('42.5%'),
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     zIndex: 3,
   },
   textData: {
-    color: DARK_COLOR,
+    color: LIGHT_COLOR,
     alignSelf: 'center',
     marginVertical: hp('0.5%'),
   },

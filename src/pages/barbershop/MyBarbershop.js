@@ -71,8 +71,8 @@ const MyBarbershop = ({navigation, token}) => {
   };
   const goToMyProducts = () => {
     if (!barbershop) {
-      Alert.alert("Ups, algo salió mal", "Lo sentimos, intentelo más tarde")
-    }else{
+      Alert.alert('Ups, algo salió mal', 'Lo sentimos, intentelo más tarde');
+    } else {
       navigation.navigate('MyProducts', {barbershop_id: barbershop.id});
     }
   };

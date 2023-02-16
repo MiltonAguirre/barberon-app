@@ -18,7 +18,7 @@ import {DARK_COLOR, LIGHT_COLOR, PRIMARY_COLOR} from '../utils/constants';
 import ProductPreview from '../shares/ProductPreview';
 import ProductCard from '../shares/ProductCard';
 const newDate = new Date();
-const ProductsList = ({products, newTurn, myRole}) => {
+const ProductsList = ({products, saveTurn, myRole}) => {
   newDate.setMinutes(0);
   const [showModal, setShowModal] = React.useState(false);
   const [productIdx, setProductIdx] = React.useState(-1);
@@ -42,7 +42,7 @@ const ProductsList = ({products, newTurn, myRole}) => {
       ':' +
       ('0' + dateTime.getMinutes()).slice(-2);
     setShowModal(!showModal);
-    newTurn(product_id, start);
+    saveTurn(product_id, start);
   };
 
   const [showTime, setShowTime] = React.useState(false);
@@ -65,7 +65,6 @@ const ProductsList = ({products, newTurn, myRole}) => {
   const showDatepicker = () => {
     setShowDate(true);
   };
-  console.log('myRole : ', myRole);
   return (
     <View style={styles.container}>
       <SafeAreaView style={{height: hp('25%'), paddingVertical: hp('1.5%')}}>
@@ -92,7 +91,11 @@ const ProductsList = ({products, newTurn, myRole}) => {
             <View style={styles.modal}>
               <Button
                 onPress={() => setShowModal(!showModal)}
-                icon={{name:'times', type:'font-awesome-5', color:PRIMARY_COLOR}}
+                icon={{
+                  name: 'times',
+                  type: 'font-awesome-5',
+                  color: PRIMARY_COLOR,
+                }}
                 buttonStyle={styles.closeBtn}
               />
               <ProductCard {...products[productIdx]} />
@@ -150,7 +153,7 @@ const ProductsList = ({products, newTurn, myRole}) => {
                       styles.bottomBtns,
                       {backgroundColor: PRIMARY_COLOR},
                     ]}
-                    disabled={myRole == null}
+                    disabled={myRole != 2}
                   />
                 </View>
               </>

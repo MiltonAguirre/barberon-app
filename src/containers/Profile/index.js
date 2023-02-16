@@ -1,9 +1,15 @@
 import React from 'react';
 import {Text, View, ActivityIndicator} from 'react-native';
 import {Icon, Image} from 'react-native-elements';
-import {DARK_COLOR, SECONDARY_COLOR} from '../../utils/constants';
+import {
+  DARK_COLOR,
+  LIGHT_COLOR,
+  PRIMARY_COLOR,
+  SECONDARY_COLOR,
+} from '../../utils/constants';
 import Header from '../../shares/Header';
 import styles from './styles';
+import LinearGradient from 'react-native-linear-gradient';
 
 const Profile = ({
   id,
@@ -31,8 +37,7 @@ const Profile = ({
             <Text style={styles.title}>Mi perfíl</Text>
 
             {!id ? (
-              <View
-                style={styles.loadingContainer}>
+              <View style={styles.loadingContainer}>
                 <ActivityIndicator
                   color={DARK_COLOR}
                   size="large"
@@ -42,12 +47,17 @@ const Profile = ({
               </View>
             ) : (
               <>
-                <View style={styles.section}>
+                <LinearGradient
+                  start={{x: 0, y: 0}}
+                  end={{x: 1, y: 1}}
+                  colors={[DARK_COLOR, DARK_COLOR, PRIMARY_COLOR]}
+                  style={styles.section}>
+                  <View style={{margin:5, alignItems:'center' }}>
                   <Text style={styles.subtitle}>Contacto</Text>
                   <View style={[styles.row, styles.rowData]}>
                     <Icon
                       name="person"
-                      color={SECONDARY_COLOR}
+                      color={PRIMARY_COLOR}
                       iconStyle={styles.icon}
                     />
                     <Text style={styles.textData}>
@@ -58,7 +68,7 @@ const Profile = ({
                     <View style={[styles.row, styles.rowData]}>
                       <Icon
                         name="phone"
-                        color={SECONDARY_COLOR}
+                        color={PRIMARY_COLOR}
                         iconStyle={styles.icon}
                       />
                       <Text style={styles.textData}>{phone}</Text>
@@ -67,22 +77,20 @@ const Profile = ({
                   <View style={[styles.row, styles.rowData]}>
                     <Icon
                       name="mail"
-                      color={SECONDARY_COLOR}
+                      color={PRIMARY_COLOR}
                       iconStyle={styles.icon}
                     />
                     <Text style={[styles.textData, {fontStyle: 'italic'}]}>
                       {email}
                     </Text>
                   </View>
-                </View>
-
-                <View style={styles.section}>
+                  </View>
                   <Text style={styles.subtitle}>Ubicación</Text>
                   {city && state && (
                     <View style={[styles.row, styles.rowData]}>
                       <Icon
                         name="place"
-                        color={SECONDARY_COLOR}
+                        color={PRIMARY_COLOR}
                         iconStyle={styles.icon}
                       />
                       <Text style={styles.textData}>{city + ', ' + state}</Text>
@@ -91,7 +99,7 @@ const Profile = ({
                   <View style={[styles.row, styles.rowData]}>
                     <Icon
                       name="public"
-                      color={SECONDARY_COLOR}
+                      color={PRIMARY_COLOR}
                       iconStyle={styles.icon}
                     />
                     <Text style={styles.textData}>
@@ -102,13 +110,13 @@ const Profile = ({
                     <View style={[styles.row, styles.rowData]}>
                       <Icon
                         name="location-city"
-                        color={SECONDARY_COLOR}
+                        color={PRIMARY_COLOR}
                         iconStyle={styles.icon}
                       />
                       <Text style={styles.textData}>{address}</Text>
                     </View>
                   )}
-                </View>
+                </LinearGradient>
               </>
             )}
           </View>
