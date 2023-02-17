@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, TouchableOpacity} from 'react-native';
+import {View, TouchableOpacity, Alert} from 'react-native';
 import {Text, Icon, Badge} from 'react-native-elements';
 import LinearGradient from 'react-native-linear-gradient';
 import {
@@ -28,6 +28,12 @@ const Turn = ({
     {icon: 'content-cut', title: product_name},
     {icon: imBarber ? 'person' : 'storefront', title: owned},
   ];
+  const handleCancel = id => {
+    Alert.alert('Cancelar turno', 'Esta seguro de cancelar el turno?', [
+      {text: 'No'},
+      {text: 'Si', onPress: () => cancelTurn(id)},
+    ]);
+  };
   return (
     <React.Fragment>
       <LinearGradient
@@ -40,8 +46,13 @@ const Turn = ({
           onPress={() => console.log('Now will open turn')}>
           {rows.map((row, index) => (
             <View style={styles.row} key={index}>
-              <Icon key={index} name={row.icon} color={SECONDARY_COLOR} iconStyle={{marginHorizontal:5}}/>
-              <Text style={[!index ? styles.titleCard: styles.subtitleCard]}>
+              <Icon
+                key={index}
+                name={row.icon}
+                color={SECONDARY_COLOR}
+                iconStyle={{marginHorizontal: 5}}
+              />
+              <Text style={[!index ? styles.titleCard : styles.subtitleCard]}>
                 {row.title}
               </Text>
             </View>
@@ -54,7 +65,7 @@ const Turn = ({
               name="delete"
               size={20}
               color="red"
-              onPress={() => cancelTurn(id)}
+              onPress={() => handleCancel(id)}
             />
           )}
         </View>

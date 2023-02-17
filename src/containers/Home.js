@@ -1,13 +1,21 @@
 import React from 'react';
 import {Text, View, StyleSheet, ActivityIndicator} from 'react-native';
-import {DARK_COLOR} from '../utils/constants';
+import {PRIMARY_COLOR} from '../utils/constants';
 import Header from '../shares/Header';
 import Searcher from '../shares/Searcher';
 import Menu from '../shares/Menu';
 import Styles from '../utils/styles';
 import BarberList from './BarberList';
 
-const Home = ({items, goToBarber, goToHome, setSearch, search, openDrawer}) => {
+const Home = ({
+  items,
+  goToBarber,
+  goToHome,
+  setSearch,
+  search,
+  openDrawer,
+  loading,
+}) => {
   return (
     <View style={Styles.container}>
       <Header />
@@ -19,11 +27,11 @@ const Home = ({items, goToBarber, goToHome, setSearch, search, openDrawer}) => {
       />
       <Searcher search={search} onChange={setSearch} />
       <View style={{margin: 5}}>
-        {!items ? (
+        {loading ? (
           <View style={styles.container}>
             <ActivityIndicator
-              color={DARK_COLOR}
-              size="small"
+              color={PRIMARY_COLOR}
+              size="large"
               style={{margin: 10}}
             />
             <Text style={Styles.text}>Cargando tiendas</Text>
@@ -41,6 +49,7 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     justifyContent: 'center',
-    width: '100%',
+    padding: 10,
+    margin: 10,
   },
 });

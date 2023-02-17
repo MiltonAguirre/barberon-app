@@ -4,9 +4,9 @@ import Home from '../containers/Home';
 import useBarbershops from '../hooks/useBarbershops';
 import useNotificationsFCM from '../hooks/useNotificationsFCM';
 
-const HomeScreen = ({isLoading, navigation}) => {
+const HomeScreen = ({navigation}) => {
   const [search, onChangeSearch] = useState('');
-  const {barbershops} = useBarbershops();
+  const {barbershops, loading} = useBarbershops();
   const goToBarber = idx => {
     navigation.navigate('Barbershop', {barbershop: barbershops[idx]});
   };
@@ -26,7 +26,7 @@ const HomeScreen = ({isLoading, navigation}) => {
         openDrawer={openDrawer}
         setSearch={onChangeSearch}
         search={search}
-        isLoading={isLoading}
+        isLoading={loading}
       />
     </View>
   );

@@ -165,7 +165,6 @@ export const createTurn = (token, product_id, start) => {
   const formData = new FormData();
   formData.append('start', start);
   formData.append('product_id', product_id);
-  console.log(formData);
   return new Promise((resolve, rejected) => {
     axios
       .post(`${API_HOST}/api/users/turns`, formData, {
@@ -185,7 +184,7 @@ export const cancelUserTurn = (token, turn_id) => {
   console.log('API cancel turn as user');
   return new Promise((resolve, rejected) => {
     axios
-      .post(`${API_HOST}/api/users/turns/cancel/${turn_id}`, {
+      .get(`${API_HOST}/api/users/turns/cancel/${turn_id}`, {
         headers: {...headers, Authorization: 'Bearer ' + token},
       })
       .then(data => {
@@ -199,22 +198,22 @@ export const cancelUserTurn = (token, turn_id) => {
   });
 };
 export const getTurn = (token, turn_id) => {
-    console.log("API get turn");
-    return new Promise((resolve, rejected) => {
-        axios
-            .get(`${API_HOST}/api/users/turns/show/${turn_id}`, {
-                headers: { ...headers, 'Authorization': 'Bearer ' + token }
-            })
-            .then((data) => {
-                resolve(data)
-            })
-            .catch((error) => {
-                console.log("API ERROR: ")
-                console.log(error.message)
-                rejected(error)
-            })
-    })
-}
+  console.log('API get turn');
+  return new Promise((resolve, rejected) => {
+    axios
+      .get(`${API_HOST}/api/users/turns/show/${turn_id}`, {
+        headers: {...headers, Authorization: 'Bearer ' + token},
+      })
+      .then(data => {
+        resolve(data);
+      })
+      .catch(error => {
+        console.log('API ERROR: ');
+        console.log(error.message);
+        rejected(error);
+      });
+  });
+};
 export const getBarbershops = () => {
   console.log('API get barbershops');
   return new Promise((resolve, rejected) => {
@@ -408,9 +407,13 @@ export const acceptTurn = (token, turn_id) => {
   console.log('API accept turn as barber');
   return new Promise((resolve, rejected) => {
     axios
-      .post(`${API_HOST}/api/auth/barbershops/turns/accept`, {turn_id}, {
-        headers: {...headers, Authorization: 'Bearer ' + token},
-      })
+      .post(
+        `${API_HOST}/api/auth/barbershops/turns/accept`,
+        {turn_id},
+        {
+          headers: {...headers, Authorization: 'Bearer ' + token},
+        },
+      )
       .then(data => {
         resolve(data);
       })

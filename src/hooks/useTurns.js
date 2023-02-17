@@ -1,10 +1,16 @@
 import {useNavigation} from '@react-navigation/native';
 import {useState, useEffect} from 'react';
 import {useSelector} from 'react-redux';
-import {createTurn, getBarbershopTurns, getUserTurns} from '../API';
+import {
+  cancelBarbershopTurn,
+  cancelUserTurn,
+  createTurn,
+  getBarbershopTurns,
+  getUserTurns,
+} from '../API';
 const turnsByRole = {
-  1: getBarbershopTurns,
-  2: getUserTurns,
+  get: {1: getBarbershopTurns, 2: getUserTurns},
+  cancel: {1: cancelBarbershopTurn, 2: cancelUserTurn},
 };
 const useTurns = props => {
   const navigation = useNavigation();
@@ -14,10 +20,12 @@ const useTurns = props => {
   const getTurns = async () => {
     try {
       setLoading(true);
-      if (token) {
-        let response = await turnsByRole[role_id](token);
+      if (!token) {
+        navigation.replace('AuthStack');
+      } else {
+        let response = await turnsByRole.get[role_id](token);
         if (response.status == 200) {
-          console.log("Turns => ",response.data);
+          console.log('Turns => ', response.data);
           setTurns(response.data);
         }
       }
@@ -27,13 +35,14 @@ const useTurns = props => {
       setLoading(false);
     }
   };
-  const saveTurn = async ({product_id, start}) => {
+  const saveTurn = async (product_id, start) => {
     try {
       setLoading(true);
-      if (token) {
+      if (!token) {
+        navigation.replace('AuthStack');
+      } else {
         let response = await createTurn(token, product_id, start);
         if (response.status == 200) {
-          // setTurns(response.data);
           navigation.navigate('Turns');
         }
       }
@@ -43,8 +52,21 @@ const useTurns = props => {
       setLoading(false);
     }
   };
-  const cancelTurn = () => {
-    console.log('Cancel Turn');
+  const cancelTurn = async id => {
+    console.log('Cancel Turn: ', id);
+
+    try {
+      setLoading(true);
+      if (!token) {
+        navigation.replace('AuthStack');
+      } else {
+        await turnsByRole.cancel[role_id](token, id);
+      }
+    } catch (error) {
+      console.log('Error: ', error);
+    } finally {
+      setLoading(false);
+    }
   };
   const confirmTurn = () => {
     console.log('Confirm Turn');
@@ -57,10 +79,13 @@ const useTurns = props => {
   };
 
   useEffect(() => {
-    getTurns();
+    const unsubscribe = navigation.addListener('focus', () => {
+      getTurns();
+    });
+    return unsubscribe;
   }, []);
 
-  return {turns, saveTurn, cancelTurn, confirmTurn, turnsByFilter};
+  return {loading, turns, saveTurn, cancelTurn, confirmTurn, turnsByFilter};
 };
 
 export default useTurns;
