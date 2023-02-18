@@ -1,19 +1,13 @@
 import {StyleSheet} from 'react-native';
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
-} from 'react-native-responsive-screen';
-import {
-  DARK_COLOR,
-  LIGHT_COLOR,
-  PRIMARY_COLOR,
-  SECONDARY_COLOR,
-} from '../../utils/constants';
+import {widthPercentageToDP as wp} from 'react-native-responsive-screen';
+import {LIGHT_COLOR, SECONDARY_COLOR} from '../../utils/constants';
 
 const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
     alignItems: 'center',
+    width: '98%',
+    padding: 5,
   },
   card: {
     width: wp('75%'),
@@ -21,7 +15,7 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     borderWidth: 2,
     borderColor: '#FFF',
-    margin:5,
+    margin: 5,
     paddingVertical: 10,
     marginBottom: 10,
     alignItems: 'center',
@@ -33,32 +27,14 @@ const styles = StyleSheet.create({
   },
   titleCard: {
     fontSize: 18,
-    fontWeight: '700',
-    padding: 5,
+    fontFamily: 'Poppins-Bold',
     color: SECONDARY_COLOR,
-    textTransform: 'uppercase',
   },
   subtitleCard: {
+    fontFamily: 'Poppins-Regular',
     color: LIGHT_COLOR,
     fontSize: 12,
   },
-  messageEmpty: {
-    color: DARK_COLOR,
-    alignSelf: 'center',
-    marginVertical: hp('1.5%'),
-  },
-  texts: {
-    alignItems: 'flex-start',
-    justifyContent: 'flex-start',
-    width: wp('55%'),
-  },
-  icons: {
-    width: wp('12.5%'),
-    borderRightColor: SECONDARY_COLOR,
-    borderRightWidth: wp('.5%'),
-    marginRight: wp('2.5%'),
-  },
-  icon: {paddingHorizontal: wp('3%'), marginVertical: hp('.5%')},
   badge: {position: 'absolute', right: 4, top: 4},
 });
 export default styles;

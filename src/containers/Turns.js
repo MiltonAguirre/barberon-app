@@ -9,16 +9,10 @@ import {
 } from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import {widthPercentageToDP as wp} from 'react-native-responsive-screen';
-import {
-  DARK_COLOR,
-  LIGHT_COLOR,
-  PRIMARY_COLOR,
-  SECONDARY_COLOR,
-  THIRD_COLOR,
-} from '../utils/constants';
-import Header from '../shares/Header';
+import {DARK_COLOR, LIGHT_COLOR, PRIMARY_COLOR} from '../utils/constants';
+import Header from '../components/Header';
 import Turn from '../components/Turn';
-import Menu from '../shares/Menu';
+import Menu from '../components/Menu';
 import LinearGradient from 'react-native-linear-gradient';
 
 const Turns = ({
@@ -60,7 +54,7 @@ const Turns = ({
               <LinearGradient
                 start={{x: 0, y: 0}}
                 end={{x: 1, y: 1}}
-                colors={[ LIGHT_COLOR,'white']}
+                colors={[LIGHT_COLOR, 'white']}
                 key={st}
                 style={[styles.slideContainer]}>
                 <View style={[styles.rowCardHead]}>
@@ -126,11 +120,11 @@ const styles = StyleSheet.create({
     marginTop: 0,
     width: wp('90%'),
     borderRadius: 12,
-    shadowColor:PRIMARY_COLOR,
-    shadowOffset:{width: 1, height: 1},
-    shadowOpacity:.75,
+    shadowColor: PRIMARY_COLOR,
+    shadowOffset: {width: 1, height: 1},
+    shadowOpacity: 0.75,
     shadowRadius: 10,
-    elevation:2
+    elevation: 2,
   },
   scroll: {
     padding: 10,

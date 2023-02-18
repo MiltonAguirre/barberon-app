@@ -6,7 +6,7 @@ import {
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 import {PRIMARY_COLOR, DARK_COLOR, LIGHT_COLOR} from '../utils/constants';
-import Header from '../shares/Header';
+import Header from '../components/Header';
 import ProductsList from './ProductList';
 import {ScrollView} from 'react-native-gesture-handler';
 

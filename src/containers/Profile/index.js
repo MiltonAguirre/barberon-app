@@ -7,7 +7,7 @@ import {
   PRIMARY_COLOR,
   SECONDARY_COLOR,
 } from '../../utils/constants';
-import Header from '../../shares/Header';
+import Header from '../../components/Header';
 import styles from './styles';
 import LinearGradient from 'react-native-linear-gradient';
 

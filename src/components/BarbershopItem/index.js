@@ -5,7 +5,6 @@ import LinearGradient from 'react-native-linear-gradient';
 import {checkIdOpen} from '../../utils';
 import {
   DARK_COLOR,
-  LIGHT_COLOR,
   PRIMARY_COLOR,
   SECONDARY_COLOR,
 } from '../../utils/constants';
@@ -27,43 +26,22 @@ const BarbershopItem = ({name, country, zip, days, schedules, goToBarber}) => {
         <Badge
           status={isOpen ? 'success' : 'error'}
           containerStyle={styles.badge}
-          value={isOpen ? 'Open' : 'Close'}
+          value={isOpen ? 'Abierto' : 'Cerrado'}
+          textStyle={{fontFamily: 'Poppins-Italic'}}
         />
         {rows.map((row, index) => (
-          <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'flex-start',
-              alignItems: 'center',
-              width: '90%',
-            }}
-            key={index}>
-            <Icon key={index} name={row.icon} color={SECONDARY_COLOR} />
+          <View style={styles.row} key={index}>
+            <Icon
+              key={index}
+              name={row.icon}
+              color={SECONDARY_COLOR}
+              iconStyle={{paddingBottom: 4}}
+            />
             <Text style={[!index ? styles.titleCard : styles.subtitleCard]}>
               {row.title}
             </Text>
           </View>
         ))}
-        {/* <View style={styles.row}>
-          <View style={styles.icons}>
-            <Icon
-              name="storefront"
-              color={SECONDARY_COLOR}
-              iconStyle={styles.icon}
-            />
-            <Icon
-              name="place"
-              color={SECONDARY_COLOR}
-              iconStyle={styles.icon}
-            />
-          </View>
-          <View style={styles.texts}>
-            <Text style={styles.titleCard}>{name}</Text>
-            <Text style={[styles.subtitleCard, {fontStyle: 'italic'}]}>
-              {'(' + zip + ') ' + country}
-            </Text>
-          </View>
-        </View> */}
       </LinearGradient>
     </TouchableOpacity>
   );

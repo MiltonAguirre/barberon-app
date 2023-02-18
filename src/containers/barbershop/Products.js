@@ -2,13 +2,10 @@ import React, {useState} from 'react';
 import {Text, View, StyleSheet} from 'react-native';
 import {Button, Icon} from 'react-native-elements';
 import ProductsList from '../../shares/MyProductsList';
-import Header from '../../shares/Header';
+import Header from '../../components/Header';
 import NewProductForm from './NewProduct';
 import {PRIMARY_COLOR, DARK_COLOR, LIGHT_COLOR} from '../../utils/constants';
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
-} from 'react-native-responsive-screen';
+import {widthPercentageToDP as wp} from 'react-native-responsive-screen';
 
 const Products = ({products, newProduct, goBack, deleteProduct}) => {
   const [visible, setVisible] = useState(false);

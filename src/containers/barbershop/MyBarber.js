@@ -2,8 +2,8 @@ import React from 'react';
 import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
 import {Icon} from 'react-native-elements';
 import {ScrollView} from 'react-native-gesture-handler';
-import Header from '../../shares/Header';
-import Menu from '../../shares/Menu';
+import Header from '../../components/Header';
+import Menu from '../../components/Menu';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,

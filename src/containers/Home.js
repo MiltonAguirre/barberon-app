@@ -1,9 +1,9 @@
 import React from 'react';
 import {Text, View, StyleSheet, ActivityIndicator} from 'react-native';
 import {PRIMARY_COLOR} from '../utils/constants';
-import Header from '../shares/Header';
-import Searcher from '../shares/Searcher';
-import Menu from '../shares/Menu';
+import Header from '../components/Header';
+import Searcher from '../components/Searcher';
+import Menu from '../components/Menu';
 import Styles from '../utils/styles';
 import BarberList from './BarberList';
 

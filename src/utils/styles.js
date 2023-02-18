@@ -5,7 +5,6 @@ import {
 } from 'react-native-responsive-screen';
 import {
   DARK_COLOR,
-  LIGHT_COLOR,
   PRIMARY_COLOR,
   SECONDARY_COLOR,
   THIRD_COLOR,
@@ -15,6 +14,7 @@ import {
 const Styles = StyleSheet.create({
   //Text
   text: {
+    fontFamily: 'Poppins-Regular',
     color: DARK_COLOR,
     alignSelf: 'center',
     marginVertical: hp('0.5%'),
@@ -36,7 +36,7 @@ const Styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    backgroundColor: '#FFF'
+    backgroundColor: '#FFF',
   },
   row: {
     flexDirection: 'row',

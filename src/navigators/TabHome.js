@@ -5,10 +5,11 @@ import {Icon} from 'react-native-elements';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
-} from 'react-native-responsive-screen';
-import {DARK_COLOR, LIGHT_COLOR, PRIMARY_COLOR} from '../utils/constants';
+  DARK_COLOR,
+  PRIMARY_COLOR,
+  SECONDARY_COLOR,
+  THIRD_COLOR,
+} from '../utils/constants';
 import Home from '../pages/Home';
 import Profile from '../pages/Profile';
 import Turns from '../pages/Turns';
@@ -116,15 +117,15 @@ function MyTabs() {
             <View style={styles.container}>
               <Icon
                 name={iconName}
-                reverseColor={focused ? PRIMARY_COLOR : ''}
+                reverseColor={focused ? SECONDARY_COLOR : ''}
                 reverse={focused}
-                color={LIGHT_COLOR}
-                size={hp('3.5%')}
+                color={focused ? PRIMARY_COLOR : THIRD_COLOR}
+                size={24}
               />
             </View>
           );
         },
-        tabBarStyle: {backgroundColor: DARK_COLOR, height: hp('8%')},
+        tabBarStyle: styles.tabBarStyle,
         tabBarShowLabel: false,
       })}>
       <Tab.Screen
@@ -185,5 +186,9 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
+  },
+  tabBarStyle: {
+    backgroundColor: DARK_COLOR,
+    height: '8%',
   },
 });

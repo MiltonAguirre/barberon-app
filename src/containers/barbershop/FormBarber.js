@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {Text, View, StyleSheet, ScrollView} from 'react-native';
 import {Button} from 'react-native-elements';
 import {TextInputMask} from 'react-native-masked-text';
-import Header from '../../shares/Header';
+import Header from '../../components/Header';
 import SchedulesForm from '../../shares/SchedulesForm';
 import InputForm from '../../shares/inputForm';
 import {PRIMARY_COLOR, DARK_COLOR, LIGHT_COLOR} from '../../utils/constants';
