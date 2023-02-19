@@ -35,7 +35,7 @@ const BarbershopItem = ({name, country, zip, days, schedules, goToBarber}) => {
               key={index}
               name={row.icon}
               color={SECONDARY_COLOR}
-              iconStyle={{paddingBottom: 4}}
+              iconStyle={styles.icon}
             />
             <Text style={[!index ? styles.titleCard : styles.subtitleCard]}>
               {row.title}

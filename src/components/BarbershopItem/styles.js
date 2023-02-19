@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
 import {widthPercentageToDP as wp} from 'react-native-responsive-screen';
-import {LIGHT_COLOR, SECONDARY_COLOR} from '../../utils/constants';
+import {DARK_COLOR, LIGHT_COLOR, THIRD_COLOR} from '../../utils/constants';
 
 const styles = StyleSheet.create({
   row: {
@@ -10,16 +10,16 @@ const styles = StyleSheet.create({
     padding: 5,
   },
   card: {
-    width: wp('75%'),
+    width: wp('80%'),
     backgroundColor: LIGHT_COLOR,
     borderRadius: 12,
     borderWidth: 2,
-    borderColor: '#FFF',
+    borderColor: THIRD_COLOR,
     margin: 5,
     paddingVertical: 10,
     marginBottom: 10,
     alignItems: 'center',
-    shadowColor: '#000',
+    shadowColor: DARK_COLOR,
     shadowOffset: {width: 1, height: 3},
     shadowOpacity: 1,
     shadowRadius: 10,
@@ -28,13 +28,20 @@ const styles = StyleSheet.create({
   titleCard: {
     fontSize: 18,
     fontFamily: 'Poppins-Bold',
-    color: SECONDARY_COLOR,
+    color: LIGHT_COLOR,
   },
   subtitleCard: {
     fontFamily: 'Poppins-Regular',
-    color: LIGHT_COLOR,
-    fontSize: 12,
+    color: THIRD_COLOR,
   },
-  badge: {position: 'absolute', right: 4, top: 4},
+  badge: {
+    position: 'absolute',
+    right: 4,
+    top: 4,
+  },
+  icon: {
+    paddingBottom: 4,
+    marginHorizontal: 2,
+  },
 });
 export default styles;

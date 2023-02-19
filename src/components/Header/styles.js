@@ -33,10 +33,8 @@ const styles = StyleSheet.create({
     color: LIGHT_COLOR,
   },
   hub: {
-    backgroundColor: SECONDARY_COLOR,
-    color: DARK_COLOR,
-    padding: 2,
-    marginLeft: 2,
+    color: SECONDARY_COLOR,
+    fontFamily: 'Poppins-Regular',
     paddingBottom: 0,
     borderRadius: 50,
   },

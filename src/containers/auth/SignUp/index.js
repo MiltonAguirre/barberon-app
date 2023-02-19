@@ -1,42 +1,39 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, StyleSheet, TextInput, Text, ScrollView} from 'react-native';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 import {CheckBox, Button} from 'react-native-elements';
-import {validateString, validateEmail} from '../../utils';
-import TermsButton from '../../shares/TermsButton';
-import InputForm from '../../shares/inputForm';
-import {
-  PRIMARY_COLOR,
-  SECONDARY_COLOR,
-  LIGHT_COLOR,
-  DARK_COLOR,
-} from '../../utils/constants';
+import {validateString, validateEmail} from '../../../utils';
+import TermsButton from '../../../shares/TermsButton';
+import InputForm from '../../../shares/inputForm';
+import {PRIMARY_COLOR, LIGHT_COLOR, DARK_COLOR} from '../../../utils/constants';
+import Logo from '../../../components/Logo';
+import LinearGradient from 'react-native-linear-gradient';
 
 function SignUp({myOnPress, goBack}) {
-  const [email, onChangeEmail] = React.useState('');
-  const [eEmail, setEEmail] = React.useState(false);
+  const [email, onChangeEmail] = useState('');
+  const [eEmail, setEEmail] = useState(false);
 
-  const [firstName, onChangeFirstName] = React.useState('');
-  const [eFirstName, setEFirstName] = React.useState(false);
+  const [firstName, onChangeFirstName] = useState('');
+  const [eFirstName, setEFirstName] = useState(false);
 
-  const [lastName, onChangeLastName] = React.useState('');
-  const [eLastName, setELastName] = React.useState(false);
+  const [lastName, onChangeLastName] = useState('');
+  const [eLastName, setELastName] = useState(false);
 
-  const [country, onChangeCountry] = React.useState('');
-  const [eCountry, setECountry] = React.useState(false);
+  const [country, onChangeCountry] = useState('');
+  const [eCountry, setECountry] = useState(false);
 
-  const [zip, onChangeZip] = React.useState(null);
-  const [eZip, setEZip] = React.useState(false);
+  const [zip, onChangeZip] = useState(null);
+  const [eZip, setEZip] = useState(false);
 
-  const [password, onChangepassword] = React.useState('');
-  const [epassword, setEpassword] = React.useState(false);
-  const [password2, onChangepassword2] = React.useState('');
+  const [password, onChangepassword] = useState('');
+  const [epassword, setEpassword] = useState(false);
+  const [password2, onChangepassword2] = useState('');
 
-  const [checked, setChecked] = React.useState(false);
-  const [isBarber, setIsBarber] = React.useState(false);
+  const [checked, setChecked] = useState(false);
+  const [isBarber, setIsBarber] = useState(false);
 
   const submit = () => {
     const v_password = password !== password2;
@@ -57,71 +54,66 @@ function SignUp({myOnPress, goBack}) {
       );
     }
   };
+  const inputs = [
+    {
+      errorInput: eEmail,
+      label: 'Correo electrónico',
+      onChange: onChangeEmail,
+      val: email,
+    },
+    {
+      errorInput: eFirstName,
+      label: 'Nombre',
+      onChange: onChangeFirstName,
+      val: firstName,
+      secure: true,
+    },
+    {
+      errorInput: eLastName,
+      label: 'Apellidos',
+      onChange: onChangeLastName,
+      val: lastName,
+      secure: false,
+    },
+    {
+      errorInput: eCountry,
+      label: 'País',
+      onChange: onChangeCountry,
+      val: country,
+      secure: false,
+    },
+    {
+      errorInput: eZip,
+      label: 'Código postal',
+      onChange: onChangeZip,
+      val: zip,
+      secure: false,
+    },
 
+    {
+      errorInput: epassword,
+      label: 'Contraseña',
+      onChange: onChangepassword,
+      val: password,
+      secure: true,
+    },
+  ];
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>BarberON</Text>
-      <Text style={styles.subtitle}>Barberias a tu alcance</Text>
+    <LinearGradient
+      start={{x: 0, y: 0}}
+      end={{x: 0, y: 1}}
+      colors={[DARK_COLOR, PRIMARY_COLOR, DARK_COLOR]}
+      style={styles.container}>
+      <Logo size={100} />
+      <Text style={styles.title}>Hair hub</Text>
+      <Text style={styles.subtitle}>Conectá con tu estilo</Text>
       <View style={styles.card}>
-        <Text style={{color: PRIMARY_COLOR, fontSize: 24, fontWeight: '700'}}>
-          Registrarme
-        </Text>
         <ScrollView
           style={{marginVertical: 5, width: wp('90%'), height: hp('50%')}}>
           <View style={{width: '100%', alignItems: 'center'}}>
-            {[
-              {
-                error: eEmail,
-                label: 'Correo electrónico',
-                onChange: onChangeEmail,
-                val: email,
-              },
-              {
-                error: eFirstName,
-                label: 'Nombre',
-                onChange: onChangeFirstName,
-                val: firstName,
-                secure: false,
-              },
-              {
-                error: eLastName,
-                label: 'Apellidos',
-                onChange: onChangeLastName,
-                val: lastName,
-                secure: false,
-              },
-              {
-                error: eCountry,
-                label: 'País',
-                onChange: onChangeCountry,
-                val: country,
-                secure: false,
-              },
-              {
-                error: eZip,
-                label: 'Código postal',
-                onChange: onChangeZip,
-                val: zip,
-                secure: false,
-              },
-            ].map((item, index) => (
-              <InputForm
-                key={index}
-                val={item.val}
-                label={item.label}
-                errorInput={item.error}
-                onChange={item.onChange}
-                secure={item.secure}
-              />
+            {inputs.map((item, index) => (
+              <InputForm key={index} {...item} />
             ))}
-            <Text style={styles.labelInput}>Contraseña</Text>
-            <TextInput
-              style={styles.input}
-              onChangeText={password => onChangepassword(password)}
-              inputStyle={{color: LIGHT_COLOR}}
-              value={password}
-              secureTextEntry={true}
-            />
             <Text style={styles.labelInput}>Repita Contraseña</Text>
             <TextInput
               style={[styles.input, epassword ? styles.error : '']}
@@ -184,7 +176,7 @@ function SignUp({myOnPress, goBack}) {
           />
         </View>
       </View>
-    </View>
+    </LinearGradient>
   );
 }
 
@@ -200,40 +192,32 @@ const styles = StyleSheet.create({
     backgroundColor: DARK_COLOR,
   },
   title: {
-    fontSize: hp('10%'),
-    color: PRIMARY_COLOR,
-    fontWeight: '700',
+    fontFamily: 'Poppins-Bold',
+    fontSize: 36,
+    color: LIGHT_COLOR,
     textShadowColor: 'rgba(0, 0, 0, 0.75)',
     textShadowOffset: {width: 1, height: 1},
     textShadowRadius: 10,
   },
   subtitle: {
-    fontSize: hp('4%'),
+    fontFamily: 'Arial',
+    fontSize: 14,
     color: LIGHT_COLOR,
-    fontWeight: '700',
-    fontStyle: 'italic',
-    textShadowColor: 'rgba(0, 0, 0, 0.75)',
-    textShadowOffset: {width: 1, height: 1},
-    textShadowRadius: 10,
-    marginBottom: hp('4.75%'),
+    letterSpacing: 1.5,
   },
   card: {
-    backgroundColor: DARK_COLOR,
     width: wp('95%'),
     borderStyle: 'solid',
-    borderColor: PRIMARY_COLOR,
-    borderWidth: 1,
-    borderRadius: 30,
     justifyContent: 'center',
     alignItems: 'center',
     paddingVertical: 10,
   },
   labelInput: {
     color: '#FFF',
-    fontSize: hp('2.5%'),
-    fontWeight: '400',
+    fontSize: 16,
+    fontFamily: 'Poppins-Regular',
     textAlign: 'center',
-    marginTop: hp('1%'),
+    marginTop: 4,
   },
   sublabel: {
     color: '#FFF',
@@ -242,15 +226,15 @@ const styles = StyleSheet.create({
     marginBottom: hp('.5%'),
   },
   input: {
-    width: wp('70%'),
-    backgroundColor: SECONDARY_COLOR,
-    borderRadius: 15,
+    width: '75%',
+    backgroundColor: LIGHT_COLOR,
+    borderRadius: 35,
     borderWidth: 1,
-    borderColor: PRIMARY_COLOR,
+    borderColor: DARK_COLOR,
     textAlign: 'center',
-    paddingVertical: wp('1%'),
-    margin: hp('1%'),
-    color: PRIMARY_COLOR,
+    paddingVertical: 1,
+    margin: 4,
+    color: DARK_COLOR,
   },
   row: {
     flexDirection: 'row',
@@ -262,25 +246,22 @@ const styles = StyleSheet.create({
     width: wp('30%'),
     backgroundColor: DARK_COLOR,
     borderStyle: 'solid',
-    borderColor: PRIMARY_COLOR,
+    borderColor: LIGHT_COLOR,
     borderWidth: 1,
-    borderRadius: 11,
-    marginHorizontal: wp('2%'),
+    borderRadius: 7,
+    marginHorizontal: 4,
   },
   error: {
     borderColor: 'red',
     color: 'red',
   },
   checkAge: {
-    marginLeft: wp('6%'),
-    backgroundColor: SECONDARY_COLOR,
-    borderColor: PRIMARY_COLOR,
-    borderRadius: 10,
-    opacity: 0.8,
+    marginLeft: 15,
+    borderColor: LIGHT_COLOR,
+    borderRadius: 7,
   },
   checkAgeText: {
-    color: '#FFF',
-    fontSize: hp('2%'),
+    color: DARK_COLOR,
     opacity: 1,
   },
 });

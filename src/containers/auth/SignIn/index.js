@@ -4,7 +4,7 @@ import {Button} from 'react-native-elements';
 import LinearGradient from 'react-native-linear-gradient';
 import Logo from '../../../components/Logo';
 import SecondaryButton from '../../../shares/SecondaryButton';
-import {DARK_COLOR, LIGHT_COLOR, PRIMARY_COLOR} from '../../../utils/constants';
+import {DARK_COLOR, PRIMARY_COLOR} from '../../../utils/constants';
 import styles from './styles';
 
 const SignInForm = ({goToSignUp, submit, isError, goToHome, loading}) => {
