@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
 import {widthPercentageToDP as wp} from 'react-native-responsive-screen';
-import {DARK_COLOR, LIGHT_COLOR} from '../utils/constants';
+import {DARK_COLOR, LIGHT_COLOR} from '../../utils/constants';
 
 export default styles = StyleSheet.create({
   row: {

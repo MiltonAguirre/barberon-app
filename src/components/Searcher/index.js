@@ -1,7 +1,8 @@
 import React from 'react';
 import {Icon, Input} from 'react-native-elements';
 import {View} from 'react-native';
-import {DARK_COLOR, SECONDARY_COLOR} from '../utils/constants';
+import {DARK_COLOR, SECONDARY_COLOR} from '../../utils/constants';
+import styles from './styles';
 
 const Searcher = ({search, onChange}) => {
   return (

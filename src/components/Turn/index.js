@@ -1,13 +1,11 @@
 import React from 'react';
 import {View, TouchableOpacity, Alert} from 'react-native';
-import {Text, Icon, Badge} from 'react-native-elements';
+import {Text, Icon} from 'react-native-elements';
 import LinearGradient from 'react-native-linear-gradient';
 import {
   DARK_COLOR,
-  LIGHT_COLOR,
   PRIMARY_COLOR,
   SECONDARY_COLOR,
-  THIRD_COLOR,
 } from '../../utils/constants';
 import styles from './styles';
 const Turn = ({
@@ -21,7 +19,6 @@ const Turn = ({
   imBarber,
   cancelTurn,
 }) => {
-  const status = ['danger', 'warning', 'success', 'primary'];
   const owned = imBarber ? user_name : barbershop_name;
   const rows = [
     {icon: 'event', title: start.slice(2, -3) + 'hs'},

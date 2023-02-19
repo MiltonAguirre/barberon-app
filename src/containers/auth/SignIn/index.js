@@ -1,7 +1,10 @@
 import React from 'react';
 import {View, TextInput, Text} from 'react-native';
 import {Button} from 'react-native-elements';
+import LinearGradient from 'react-native-linear-gradient';
+import Logo from '../../../components/Logo';
 import SecondaryButton from '../../../shares/SecondaryButton';
+import {DARK_COLOR, LIGHT_COLOR, PRIMARY_COLOR} from '../../../utils/constants';
 import styles from './styles';
 
 const SignInForm = ({goToSignUp, submit, isError, goToHome, loading}) => {
@@ -11,9 +14,14 @@ const SignInForm = ({goToSignUp, submit, isError, goToHome, loading}) => {
     submit(username, password);
   };
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>HairHUB</Text>
-      <Text style={styles.subtitle}>Barberias a tu alcance</Text>
+    <LinearGradient
+      start={{x: 0, y: 0}}
+      end={{x: 0, y: 1}}
+      colors={[DARK_COLOR, PRIMARY_COLOR, DARK_COLOR]}
+      style={styles.container}>
+      <Logo size={100} />
+      <Text style={styles.title}>Hair hub</Text>
+      <Text style={styles.subtitle}>Conectá con tu estilo</Text>
       <View style={styles.card}>
         <TextInput
           keyboardType="email-address"
@@ -36,9 +44,7 @@ const SignInForm = ({goToSignUp, submit, isError, goToHome, loading}) => {
         />
         {isError && (
           <View style={styles.errorContainer}>
-            <Text style={styles.errorText}>
-              {isError}
-            </Text>
+            <Text style={styles.errorText}>{isError}</Text>
           </View>
         )}
         <View style={{flex: 1, marginTop: 15}}>
@@ -48,11 +54,15 @@ const SignInForm = ({goToSignUp, submit, isError, goToHome, loading}) => {
             type="clear"
             onPress={goToHome}
           />
-          <SecondaryButton onPress={onSubmit} title="INGRESAR" loading={loading}/>
+          <SecondaryButton
+            onPress={onSubmit}
+            title="INGRESAR"
+            loading={loading}
+          />
           <SecondaryButton onPress={goToSignUp} title="REGISTRAR" />
         </View>
       </View>
-    </View>
+    </LinearGradient>
   );
 };
 export default SignInForm;

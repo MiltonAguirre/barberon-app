@@ -1,7 +1,7 @@
 import React from 'react';
 import {Text} from 'react-native-elements';
 import LinearGradient from 'react-native-linear-gradient';
-import {PRIMARY_COLOR, DARK_COLOR} from '../utils/constants';
+import {PRIMARY_COLOR, DARK_COLOR} from '../../utils/constants';
 import styles from './styles';
 function Header() {
   return (

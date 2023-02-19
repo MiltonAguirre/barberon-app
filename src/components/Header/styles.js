@@ -9,7 +9,7 @@ import {
   DARK_COLOR,
   SECONDARY_COLOR,
   THIRD_COLOR,
-} from '../utils/constants';
+} from '../../utils/constants';
 
 const styles = StyleSheet.create({
   header: {
