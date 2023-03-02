@@ -10,10 +10,10 @@ const Logo = ({size}) => {
         height: size,
         justifyContent: 'center',
         alignItems: 'center',
-        borderColor: LIGHT_COLOR,
-        borderWidth: 5,
+        borderColor: DARK_COLOR,
+        borderWidth: 2,
         margin: 5,
-        borderRadius: 35,
+        borderRadius: 25,
         backgroundColor: PRIMARY_COLOR,
         shadowColor: PRIMARY_COLOR,
         shadowOpacity: 0.8,
@@ -22,10 +22,18 @@ const Logo = ({size}) => {
         elevation: 4,
       }}>
       <Text
-        style={{fontSize: size / 2, color: LIGHT_COLOR, fontWeight: 'bold'}}>
+        style={{
+          fontSize: size / 2,
+          color: LIGHT_COLOR,
+          fontWeight: 'bold',
+          fontFamily: 'Poppins-Bold',
+        }}>
         H
       </Text>
     </View>
   );
 };
 export default Logo;
+Logo.defaultProps = {
+  size: 100,
+};
