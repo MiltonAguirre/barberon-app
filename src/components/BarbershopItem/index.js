@@ -7,17 +7,18 @@ import {
   DARK_COLOR,
   PRIMARY_COLOR,
   SECONDARY_COLOR,
+  THIRD_COLOR,
 } from '../../utils/constants';
 import styles from './styles';
 
-const BarbershopItem = ({name, country, zip, days, schedules, goToBarber}) => {
+const BarbershopItem = ({name, country, zip, days, schedules, omChangeSelected}) => {
   const isOpen = checkIdOpen(schedules, days);
   const rows = [
     {icon: 'storefront', title: name},
     {icon: 'place', title: '(' + zip + ') ' + country},
   ];
   return (
-    <TouchableOpacity onPress={goToBarber}>
+    <TouchableOpacity onPress={omChangeSelected}>
       <LinearGradient
         start={{x: 0, y: 0}}
         end={{x: 1, y: 1}}
@@ -26,15 +27,15 @@ const BarbershopItem = ({name, country, zip, days, schedules, goToBarber}) => {
         <Badge
           status={isOpen ? 'success' : 'error'}
           containerStyle={styles.badge}
-          value={isOpen ? 'Abierto' : 'Cerrado'}
-          textStyle={{fontFamily: 'Poppins-Italic'}}
+          value={isOpen ? 'A' : 'C'}
+          textStyle={{fontFamily: 'Poppins-Regular'}}
         />
         {rows.map((row, index) => (
           <View style={styles.row} key={index}>
             <Icon
               key={index}
               name={row.icon}
-              color={SECONDARY_COLOR}
+              color={THIRD_COLOR}
               iconStyle={styles.icon}
             />
             <Text style={[!index ? styles.titleCard : styles.subtitleCard]}>

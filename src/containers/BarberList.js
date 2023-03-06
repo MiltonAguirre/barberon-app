@@ -3,14 +3,15 @@ import {SafeAreaView, FlatList} from 'react-native';
 import {Text} from 'react-native-elements';
 import BarbershopItem from '../components/BarbershopItem';
 import Styles from '../utils/styles';
-const BarberList = ({items, goToBarber}) => {
+const BarberList = ({items, omChangeSelected}) => {
   return (
     <React.Fragment>
       <SafeAreaView style={{flex: 1}}>
         <FlatList
+        horizontal
           data={items}
           renderItem={({item, index}) => (
-            <BarbershopItem {...item} goToBarber={() => goToBarber(index)} />
+            <BarbershopItem {...item} omChangeSelected={() => omChangeSelected(index)} />
           )}
           keyExtractor={item => item.id.toString()}
           ListEmptyComponent={

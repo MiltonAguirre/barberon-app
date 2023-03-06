@@ -6,6 +6,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {
   DARK_COLOR,
+  LIGHT_COLOR,
   PRIMARY_COLOR,
   SECONDARY_COLOR,
   THIRD_COLOR,
@@ -15,6 +16,7 @@ import Profile from '../pages/Profile';
 import Turns from '../pages/Turns';
 import MyBarbershop from '../pages/barbershop/MyBarbershop';
 import MyProducts from '../pages/barbershop/MyProducts';
+import CalendarScreen from '../pages/Calendar';
 
 const HomeStack = createNativeStackNavigator();
 function HomeStackScreen() {
@@ -60,6 +62,15 @@ function TurnsStackScreen() {
           },
         }}
         component={Turns}
+      />
+      <TurnsStack.Screen
+        name="Calendar"
+        options={{
+          header: () => {
+            return null;
+          },
+        }}
+        component={CalendarScreen}
       />
     </TurnsStack.Navigator>
   );
@@ -117,9 +128,9 @@ function MyTabs() {
             <View style={styles.container}>
               <Icon
                 name={iconName}
-                reverseColor={focused ? SECONDARY_COLOR : ''}
+                reverseColor={focused ? LIGHT_COLOR : ''}
                 reverse={focused}
-                color={focused ? PRIMARY_COLOR : THIRD_COLOR}
+                color={focused ? PRIMARY_COLOR : SECONDARY_COLOR}
                 size={24}
               />
             </View>

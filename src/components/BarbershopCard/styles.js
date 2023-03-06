@@ -10,13 +10,13 @@ const styles = StyleSheet.create({
     padding: 5,
   },
   card: {
-    minWidth: wp('55%'),
-    backgroundColor: LIGHT_COLOR,
+    width: '90%',
+    backgroundColor: DARK_COLOR,
     borderRadius: 20,
-    borderWidth: 2,
+    borderWidth: 0,
     borderColor: THIRD_COLOR,
     margin: 5,
-    paddingVertical: 10,
+    padding: 20,
     marginBottom: 10,
     alignItems: 'center',
     shadowColor: DARK_COLOR,
@@ -36,8 +36,8 @@ const styles = StyleSheet.create({
   },
   badge: {
     position: 'absolute',
-    right: 8,
-    top: 8,
+    right: 15,
+    top: 10,
   },
   icon: {
     paddingBottom: 4,

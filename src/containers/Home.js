@@ -1,21 +1,19 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Text, View, StyleSheet, ActivityIndicator} from 'react-native';
 import {PRIMARY_COLOR} from '../utils/constants';
 import Header from '../components/Header';
-import Searcher from '../components/Searcher';
 import Menu from '../components/Menu';
 import Styles from '../utils/styles';
 import BarberList from './BarberList';
+import BarbershopCard from '../components/BarbershopCard';
 
-const Home = ({
-  items,
-  goToBarber,
-  goToHome,
-  setSearch,
-  search,
-  openDrawer,
-  loading,
-}) => {
+const Home = ({items, goToBarber, goToHome, openDrawer, loading}) => {
+  const [selected, setSelected] = useState(0);
+  const omChangeSelected = val => {
+    if (items[val]) {
+      setSelected(val);
+    }
+  };
   return (
     <View style={Styles.container}>
       <Header />
@@ -25,7 +23,7 @@ const Home = ({
         openDrawer={openDrawer}
         title="Tiendas"
       />
-      <Searcher search={search} onChange={setSearch} />
+      {/* <Searcher search={search} onChange={setSearch} /> */}
       <View style={{margin: 5}}>
         {loading ? (
           <View style={styles.container}>
@@ -37,7 +35,13 @@ const Home = ({
             <Text style={Styles.text}>Cargando tiendas</Text>
           </View>
         ) : (
-          <BarberList {...{items, goToBarber}} />
+          <>
+            <BarbershopCard
+              {...items[selected]}
+              goToBarber={() => goToBarber(selected)}
+            />
+            <BarberList {...{items, omChangeSelected}} />
+          </>
         )}
       </View>
     </View>

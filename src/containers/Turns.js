@@ -14,10 +14,12 @@ import Header from '../components/Header';
 import Turn from '../components/Turn';
 import Menu from '../components/Menu';
 import LinearGradient from 'react-native-linear-gradient';
+import {Button} from 'react-native-elements';
 
 const Turns = ({
   cancelTurn,
   goToHome,
+  goToCalendar,
   openDrawer,
   toggleModal,
   imBarber,
@@ -37,8 +39,22 @@ const Turns = ({
         style={{
           flex: 1,
           justifyContent: 'flex-start',
-          alignItems: 'flex-start',
+          alignItems: 'flex-end',
         }}>
+        <Button
+          title="Calendario"
+          type="clear"
+          onPress={goToCalendar}
+          titleStyle={styles.titleBtn}
+          icon={{
+            name: 'calendar-alt',
+            type: 'font-awesome-5',
+            color: DARK_COLOR,
+            size: 24,
+          }}
+          iconRight
+          buttonStyle={{margin: 5}}
+        />
         <ScrollView
           horizontal={true}
           style={styles.scroll}
@@ -125,6 +141,11 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.75,
     shadowRadius: 10,
     elevation: 2,
+  },
+  titleBtn: {
+    color: DARK_COLOR,
+    fontWeight: 'bold',
+    padding: 5,
   },
   scroll: {
     padding: 10,

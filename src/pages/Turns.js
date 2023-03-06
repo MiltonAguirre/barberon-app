@@ -10,6 +10,9 @@ const TurnsSceen = ({navigation}) => {
   const goToHome = () => {
     navigation.navigate('Home');
   };
+  const goToCalendar = () => {
+    navigation.navigate('Calendar');
+  };
   const openDrawer = () => {
     navigation.toggleDrawer();
   };
@@ -20,6 +23,7 @@ const TurnsSceen = ({navigation}) => {
         confirmTurn={confirmTurn}
         turnsByFilter={turnsByFilter}
         goToHome={goToHome}
+        goToCalendar={goToCalendar}
         openDrawer={openDrawer}
         imBarber={role_id === 1 ? 1 : 0}
       />
