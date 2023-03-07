@@ -1,97 +1,30 @@
-import React, {useState, useEffect} from 'react';
-import {connect} from 'react-redux';
-import {setError} from '../../actions/SessionActions';
+import React from 'react';
+import {ActivityIndicator, Alert} from 'react-native';
 import MyBarberContainer from '../../containers/barbershop/MyBarber';
 import FormBarber from '../../containers/barbershop/FormBarber';
-import {ActivityIndicator} from 'react-native';
-import {getMyBarbershop, createBarbershops} from '../../API';
-import {checkInternetConection} from '../../utils';
+import useMyBarbershops from '../../hooks/useMyBarbershop';
 
-const MyBarbershop = ({navigation, token}) => {
-  const [barbershop, setBarbershop] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [trySubmit, setTrySubmit] = useState(false);
-  const getData = async () => {
-    try {
-      setLoading(true);
-      const internet = await checkInternetConection();
-      if (!internet) {
-        setError('Verifica tu conexión a internet');
-        setTrySubmit(!trySubmit);
-      } else {
-        const response = await getMyBarbershop(token);
-        setBarbershop(response.data);
-      }
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setLoading(false);
-    }
-  };
+const MyBarbershop = ({navigation}) => {
+  const {barbershop, submitNewBarbershop, loading, error} = useMyBarbershops();
 
-  const submitNewBarbershop = async (
-    name,
-    phone,
-    zip,
-    country,
-    address,
-    city,
-    state,
-    days,
-    opens,
-    closes,
-  ) => {
-    try {
-      setLoading(true);
-      const internet = await checkInternetConection();
-      if (!internet) {
-        setError('Verifica tu conexión a internet');
-        setTrySubmit(!trySubmit);
-      } else {
-        const response = await createBarbershops(
-          token,
-          name,
-          phone,
-          zip,
-          country,
-          address,
-          city,
-          state,
-          days,
-          opens,
-          closes,
-        );
-        setBarbershop(response.data);
-      }
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setLoading(false);
-    }
-  };
   const goToMyProducts = () => {
     if (!barbershop) {
-      Alert.alert('Ups, algo salió mal', 'Lo sentimos, intentelo más tarde');
+      Alert.alert('Ups, algo salió mal', 'No detectamos la barbería');
     } else {
       navigation.navigate('MyProducts', {barbershop_id: barbershop.id});
     }
   };
-
   const goToHome = () => {
     navigation.navigate('Home');
   };
-
   const openDrawer = () => {
     navigation.toggleDrawer();
   };
-  useEffect(() => {
-    getData();
-  }, []);
 
   return (
     <React.Fragment>
       {loading ? (
-        <ActivityIndicator />
+        <ActivityIndicator size={'large'} />
       ) : barbershop ? (
         <MyBarberContainer
           {...barbershop}
@@ -109,8 +42,4 @@ const MyBarbershop = ({navigation, token}) => {
     </React.Fragment>
   );
 };
-
-function mapToProps({session}) {
-  return session;
-}
-export default connect(mapToProps, {setError})(MyBarbershop);
+export default MyBarbershop;
