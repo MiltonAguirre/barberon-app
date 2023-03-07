@@ -9,8 +9,8 @@ import BarbershopCard from '../components/BarbershopCard';
 
 const Home = ({items, goToBarber, goToHome, openDrawer, loading}) => {
   const [selected, setSelected] = useState(0);
-  const omChangeSelected = val => {
-    if (items[val]) {
+  const onChangeSelected = val => {
+    if (items && items[val]) {
       setSelected(val);
     }
   };
@@ -34,13 +34,19 @@ const Home = ({items, goToBarber, goToHome, openDrawer, loading}) => {
             />
             <Text style={Styles.text}>Cargando tiendas</Text>
           </View>
+        ) : !items ? (
+          <View style={{flex: 1, alignItems: 'center'}}>
+            <Text style={{padding: 4, fontFamily: 'Poppins-Regular'}}>
+              No hay barberias disponibles
+            </Text>
+          </View>
         ) : (
           <>
             <BarbershopCard
               {...items[selected]}
               goToBarber={() => goToBarber(selected)}
             />
-            <BarberList {...{items, omChangeSelected}} />
+            <BarberList {...{items, onChangeSelected}} />
           </>
         )}
       </View>

@@ -1,5 +1,5 @@
 export const PRIMARY_COLOR="#7743DB"
-export const SECONDARY_COLOR="#F99417"
+export const SECONDARY_COLOR="#FF597B"
 export const DARK_COLOR="#3B3486"
 export const LIGHT_COLOR="#FCFDF2"
 export const THIRD_COLOR="#E8E2E2"

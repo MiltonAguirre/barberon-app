@@ -3,11 +3,15 @@ import {API_HOST} from '@env';
 import NetInfo from '@react-native-community/netinfo';
 import {PermissionsAndroid} from 'react-native';
 
-export const checkIdOpen = (schedules, days) => {
+export const checkIsOpen = (schedules, days) => {
   const now = new Date();
-  let days_array = days.split(',');
   const now_wday = now.getDay();
+  let days_array = [];
   let res = false;
+
+  if (days && typeof days === 'string') {
+    days_array = days.split(',');
+  }
   if (days_array[now_wday]) {
     schedules.forEach(schedule => {
       if (schedule.open <= now.getHours() && schedule.close > now.getHours()) {

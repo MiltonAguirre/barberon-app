@@ -1,25 +1,34 @@
 import React from 'react';
 import {View, Text} from 'react-native';
-import {DARK_COLOR, LIGHT_COLOR, PRIMARY_COLOR} from '../../utils/constants';
+import LinearGradient from 'react-native-linear-gradient';
+import {
+  DARK_COLOR,
+  LIGHT_COLOR,
+  PRIMARY_COLOR,
+  SECONDARY_COLOR,
+  THIRD_COLOR,
+} from '../../utils/constants';
 
 const Logo = ({size}) => {
   return (
-    <View
+    <LinearGradient
+      start={{x: 0, y: 0}}
+      end={{x: 1, y: 1}}
+      colors={[DARK_COLOR, PRIMARY_COLOR, THIRD_COLOR]}
       style={{
         width: size,
         height: size,
         justifyContent: 'center',
         alignItems: 'center',
-        borderColor: DARK_COLOR,
-        borderWidth: 2,
+        borderColor: PRIMARY_COLOR,
+        borderWidth: 1,
         margin: 5,
         borderRadius: 25,
-        backgroundColor: PRIMARY_COLOR,
-        shadowColor: PRIMARY_COLOR,
+        shadowColor: SECONDARY_COLOR,
         shadowOpacity: 0.8,
-        shadowRadius: 10,
+        shadowRadius: 15,
         shadowOffset: {width: 2, height: 2},
-        elevation: 4,
+        elevation: 5,
       }}>
       <Text
         style={{
@@ -27,10 +36,13 @@ const Logo = ({size}) => {
           color: LIGHT_COLOR,
           fontWeight: 'bold',
           fontFamily: 'Poppins-Bold',
+          textShadowColor: DARK_COLOR,
+          textShadowOffset: {width: 0, height: 0},
+          textShadowRadius: 15,
         }}>
         H
       </Text>
-    </View>
+    </LinearGradient>
   );
 };
 export default Logo;

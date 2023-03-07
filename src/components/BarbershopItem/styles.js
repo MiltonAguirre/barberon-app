@@ -13,8 +13,6 @@ const styles = StyleSheet.create({
     minWidth: wp('55%'),
     backgroundColor: LIGHT_COLOR,
     borderRadius: 20,
-    borderWidth: 2,
-    borderColor: THIRD_COLOR,
     margin: 5,
     paddingVertical: 10,
     marginBottom: 10,

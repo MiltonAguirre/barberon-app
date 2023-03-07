@@ -1,5 +1,4 @@
 import {StyleSheet} from 'react-native';
-import {widthPercentageToDP as wp} from 'react-native-responsive-screen';
 import {DARK_COLOR, LIGHT_COLOR, THIRD_COLOR} from '../../utils/constants';
 
 const styles = StyleSheet.create({
@@ -13,10 +12,9 @@ const styles = StyleSheet.create({
     width: '90%',
     backgroundColor: DARK_COLOR,
     borderRadius: 20,
-    borderWidth: 0,
-    borderColor: THIRD_COLOR,
     margin: 5,
-    padding: 20,
+    padding: 10,
+    paddingTop: 20,
     marginBottom: 10,
     alignItems: 'center',
     shadowColor: DARK_COLOR,

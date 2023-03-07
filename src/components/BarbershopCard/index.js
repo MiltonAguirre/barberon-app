@@ -2,7 +2,7 @@ import React from 'react';
 import {View, TouchableOpacity} from 'react-native';
 import {Text, Icon, Badge} from 'react-native-elements';
 import LinearGradient from 'react-native-linear-gradient';
-import {checkIdOpen} from '../../utils';
+import {checkIsOpen} from '../../utils';
 import {
   DARK_COLOR,
   LIGHT_COLOR,
@@ -12,16 +12,8 @@ import {
 } from '../../utils/constants';
 import styles from './styles';
 
-const BarbershopCard = ({
-  id,
-  name,
-  country,
-  zip,
-  days,
-  schedules,
-  goToBarber,
-}) => {
-  const isOpen = checkIdOpen(schedules, days);
+const BarbershopCard = ({name, country, zip, days, schedules, goToBarber}) => {
+  const isOpen = checkIsOpen(schedules, days);
   const rows = [
     {icon: 'storefront', title: name},
     {icon: 'place', title: '(' + zip + ') ' + country},
@@ -37,7 +29,7 @@ const BarbershopCard = ({
       <LinearGradient
         start={{x: 0, y: 0}}
         end={{x: 1, y: 1}}
-        colors={[DARK_COLOR, PRIMARY_COLOR, THIRD_COLOR]}
+        colors={[DARK_COLOR, PRIMARY_COLOR, SECONDARY_COLOR]}
         style={styles.card}>
         <Badge
           status={isOpen ? 'success' : 'error'}
