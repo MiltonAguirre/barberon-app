@@ -5,7 +5,12 @@ import {TextInputMask} from 'react-native-masked-text';
 import Header from '../../components/Header';
 import SchedulesForm from '../../shares/SchedulesForm';
 import InputForm from '../../shares/inputForm';
-import {PRIMARY_COLOR, DARK_COLOR, LIGHT_COLOR} from '../../utils/constants';
+import {
+  PRIMARY_COLOR,
+  DARK_COLOR,
+  LIGHT_COLOR,
+  THIRD_COLOR,
+} from '../../utils/constants';
 import {validateString, validatePhone, validateLocation} from '../../utils';
 import {
   widthPercentageToDP as wp,
@@ -128,9 +133,7 @@ function FormBarber({submit}) {
               }}
               value={phone}
               onChangeText={phone => onChangePhone(phone)}
-              inputStyle={{color: PRIMARY_COLOR}}
               placeholder="Telefono"
-              placeholderTextColor={LIGHT_COLOR}
             />
             <Text style={styles.sublabel}>
               (Sin el 15, anteponiendo código de área sin el cero)
@@ -238,16 +241,17 @@ const styles = StyleSheet.create({
     elevation: 2,
   },
   input: {
-    width: wp('70%'),
-    height: 40,
-    backgroundColor: DARK_COLOR,
-    borderRadius: 15,
+    width: '80%',
+    backgroundColor: LIGHT_COLOR,
+    borderRadius: 35,
     borderWidth: 1,
-    borderColor: PRIMARY_COLOR,
+    borderColor: THIRD_COLOR,
     textAlign: 'center',
-    paddingVertical: wp('1%'),
-    margin: hp('1%'),
-    color: PRIMARY_COLOR,
+    justifyContent: 'center',
+    margin: 8,
+    paddingVertical: 2,
+    color: DARK_COLOR,
+    fontWeight: 'bold',
   },
   btnContainer: {
     width: wp('70%'),

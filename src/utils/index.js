@@ -3,7 +3,7 @@ import {API_HOST} from '@env';
 import NetInfo from '@react-native-community/netinfo';
 import {PermissionsAndroid} from 'react-native';
 
-export const checkIdOpen = (schedules, days) => {
+export const checkIsOpen = (schedules, days) => {
   const now = new Date();
   let days_array = days.split(',');
   const now_weekDay = now.getDay();

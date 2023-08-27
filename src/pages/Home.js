@@ -20,7 +20,7 @@ const HomeScreen = ({navigation}) => {
   return (
     <View style={{flex: 1}}>
       <Home
-        items={barbershops ?? []}
+        items={barbershops}
         goToBarber={goToBarber}
         goToHome={goToHome}
         openDrawer={openDrawer}

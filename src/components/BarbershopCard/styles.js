@@ -1,5 +1,4 @@
 import {StyleSheet} from 'react-native';
-import {widthPercentageToDP as wp} from 'react-native-responsive-screen';
 import {DARK_COLOR, LIGHT_COLOR, THIRD_COLOR} from '../../utils/constants';
 
 const styles = StyleSheet.create({
@@ -10,11 +9,12 @@ const styles = StyleSheet.create({
     padding: 5,
   },
   card: {
-    minWidth: wp('55%'),
-    backgroundColor: LIGHT_COLOR,
+    width: '90%',
+    backgroundColor: DARK_COLOR,
     borderRadius: 20,
     margin: 5,
-    paddingVertical: 10,
+    padding: 10,
+    paddingTop: 20,
     marginBottom: 10,
     alignItems: 'center',
     shadowColor: DARK_COLOR,
@@ -34,8 +34,8 @@ const styles = StyleSheet.create({
   },
   badge: {
     position: 'absolute',
-    right: 8,
-    top: 8,
+    right: 15,
+    top: 10,
   },
   icon: {
     paddingBottom: 4,

@@ -33,10 +33,13 @@ const styles = StyleSheet.create({
     color: LIGHT_COLOR,
   },
   hub: {
-    color: SECONDARY_COLOR,
+    backgroundColor: SECONDARY_COLOR,
+    color: LIGHT_COLOR,
+    textTransform: 'capitalize',
     fontFamily: 'Poppins-Regular',
+    borderRadius: 5,
+    padding: 2,
     paddingBottom: 0,
-    borderRadius: 50,
   },
 });
 export default styles;

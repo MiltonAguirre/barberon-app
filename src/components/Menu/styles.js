@@ -9,10 +9,10 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     alignSelf: 'center',
-    width: wp('100%'),
-    height: hp('10%'),
-    marginBottom: 10,
-    padding: hp('1.5%'),
+    width: wp('95%'),
+    height: hp('8%'),
+    marginBottom: 5,
+    padding: 4,
   },
   row: {
     flexDirection: 'row',

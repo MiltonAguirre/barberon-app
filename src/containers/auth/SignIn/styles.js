@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
   card: {
     width: wp('75%'),
     height: hp('30%'),
-    marginTop: hp('2.5%'),
+    marginTop: 15,
     justifyContent: 'center',
     alignContent: 'center',
   },
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins-Bold',
     fontSize: 36,
     color: LIGHT_COLOR,
-    textShadowColor: 'rgba(0, 0, 0, 0.75)',
+    textShadowColor: DARK_COLOR,
     textShadowOffset: {width: 1, height: 1},
     textShadowRadius: 10,
   },

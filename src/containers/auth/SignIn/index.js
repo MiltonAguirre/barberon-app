@@ -2,8 +2,9 @@ import React from 'react';
 import {View, TextInput, Text} from 'react-native';
 import {Button} from 'react-native-elements';
 import LinearGradient from 'react-native-linear-gradient';
+import ButtonPrimary from '../../../components/ButtonPrimary';
+import FadeInView from '../../../components/FadeInView';
 import Logo from '../../../components/Logo';
-import SecondaryButton from '../../../shares/SecondaryButton';
 import {DARK_COLOR, PRIMARY_COLOR} from '../../../utils/constants';
 import styles from './styles';
 
@@ -19,9 +20,11 @@ const SignInForm = ({goToSignUp, submit, isError, goToHome, loading}) => {
       end={{x: 0, y: 1}}
       colors={[DARK_COLOR, PRIMARY_COLOR, DARK_COLOR]}
       style={styles.container}>
-      <Logo size={100} />
+      <Logo />
       <Text style={styles.title}>Hair hub</Text>
-      <Text style={styles.subtitle}>Conectá con tu estilo</Text>
+      <FadeInView duration={2500}>
+        <Text style={styles.subtitle}>Conectá con tu estilo</Text>
+      </FadeInView>
       <View style={styles.card}>
         <TextInput
           keyboardType="email-address"
@@ -40,7 +43,7 @@ const SignInForm = ({goToSignUp, submit, isError, goToHome, loading}) => {
           value={password}
           autoCapitalize="none"
           secureTextEntry={true}
-          leftIcon={{type: 'font-awesome', name: 'lock', color: '#FFA800'}}
+          leftIcon={{type: 'font-awesome', name: 'lock', color: '#FFF'}}
         />
         {isError && (
           <View style={styles.errorContainer}>
@@ -54,12 +57,12 @@ const SignInForm = ({goToSignUp, submit, isError, goToHome, loading}) => {
             type="clear"
             onPress={goToHome}
           />
-          <SecondaryButton
+          <ButtonPrimary
             onPress={onSubmit}
             title="INGRESAR"
             loading={loading}
           />
-          <SecondaryButton onPress={goToSignUp} title="REGISTRAR" />
+          <ButtonPrimary onPress={goToSignUp} title="REGISTRAR" />
         </View>
       </View>
     </LinearGradient>
