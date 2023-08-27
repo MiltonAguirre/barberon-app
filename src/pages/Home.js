@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {View} from 'react-native';
 import Home from '../containers/Home';
 import useBarbershops from '../hooks/useBarbershops';
-import useNotificationsFCM from '../hooks/useNotificationsFCM';
+// import useNotificationsFCM from '../hooks/useNotificationsFCM';
 
 const HomeScreen = ({navigation}) => {
   const [search, onChangeSearch] = useState('');
@@ -16,7 +16,7 @@ const HomeScreen = ({navigation}) => {
   const openDrawer = () => {
     navigation.toggleDrawer();
   };
-  const {fcmToken} = useNotificationsFCM();
+  // const {fcmToken} = useNotificationsFCM();
   return (
     <View style={{flex: 1}}>
       <Home

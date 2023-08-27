@@ -24,20 +24,20 @@ const Home = ({items, goToBarber, goToHome, openDrawer, loading}) => {
         title="Tiendas"
       />
       {/* <Searcher search={search} onChange={setSearch} /> */}
-      <View style={{margin: 5}}>
+      <View style={styles.m5}>
         {loading ? (
           <View style={styles.container}>
             <ActivityIndicator
               color={PRIMARY_COLOR}
               size="large"
-              style={{margin: 10}}
+              style={styles.m10}
             />
             <Text style={Styles.text}>Cargando tiendas</Text>
           </View>
         ) : !items ? (
-          <View style={{flex: 1, alignItems: 'center'}}>
-            <Text style={{padding: 4, fontFamily: 'Poppins-Regular'}}>
-              No hay barberias disponibles
+          <View style={styles.flexCenter}>
+            <Text style={styles.emptyMessage}>
+              No hay barberías disponibles
             </Text>
           </View>
         ) : (
@@ -62,4 +62,8 @@ const styles = StyleSheet.create({
     padding: 10,
     margin: 10,
   },
+  flexCenter: {flex: 1, alignItems: 'center'},
+  emptyMessage: {padding: 4, fontFamily: 'Poppins-Regular'},
+  m5: {margin: 5},
+  m10: {margin: 10},
 });

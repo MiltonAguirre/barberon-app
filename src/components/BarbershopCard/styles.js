@@ -1,6 +1,10 @@
 import {StyleSheet} from 'react-native';
 import {DARK_COLOR, LIGHT_COLOR, THIRD_COLOR} from '../../utils/constants';
 
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
 const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
@@ -9,7 +13,7 @@ const styles = StyleSheet.create({
     padding: 5,
   },
   card: {
-    width: '90%',
+    width: wp('90%'),
     backgroundColor: DARK_COLOR,
     borderRadius: 20,
     margin: 5,
@@ -41,5 +45,13 @@ const styles = StyleSheet.create({
     paddingBottom: 4,
     marginHorizontal: 2,
   },
+  italic: {fontFamily: 'Poppins-Italic'},
+  rowDays: {
+    justifyContent: 'space-around',
+    width: '60%',
+    marginHorizontal: 'auto',
+  },
+  textActive: {color: LIGHT_COLOR, fontFamily: 'Poppins-Bold'},
+  textDesactive: {color: '#BBB', fontFamily: 'Poppins-Regular'},
 });
 export default styles;

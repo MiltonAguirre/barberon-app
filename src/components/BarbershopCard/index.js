@@ -5,7 +5,6 @@ import LinearGradient from 'react-native-linear-gradient';
 import {checkIsOpen} from '../../utils';
 import {
   DARK_COLOR,
-  LIGHT_COLOR,
   PRIMARY_COLOR,
   SECONDARY_COLOR,
   THIRD_COLOR,
@@ -35,7 +34,7 @@ const BarbershopCard = ({name, country, zip, days, schedules, goToBarber}) => {
           status={isOpen ? 'success' : 'error'}
           containerStyle={styles.badge}
           value={isOpen ? 'Abierto' : 'Cerrado'}
-          textStyle={{fontFamily: 'Poppins-Italic'}}
+          textStyle={styles.italic}
         />
         {rows.map((row, index) => (
           <View style={styles.row} key={index}>
@@ -50,24 +49,14 @@ const BarbershopCard = ({name, country, zip, days, schedules, goToBarber}) => {
             </Text>
           </View>
         ))}
-        <View
-          style={[
-            styles.row,
-            {
-              justifyContent: 'space-around',
-              width: '60%',
-              marginHorizontal: 'auto',
-            },
-          ]}>
+        <View style={[styles.row, styles.rowDays]}>
           {weekDays.map((weekDay, index) => {
-            const acti = days_work[index];
+            const active = days_work[index];
             return (
               <View key={index}>
                 <Text
                   style={[
-                    acti > 0
-                      ? {color: LIGHT_COLOR, fontFamily: 'Poppins-Bold'}
-                      : {color: '#BBB', fontFamily: 'Poppins-Regular'},
+                    active > 0 ? styles.textActive : styles.textDesactive,
                   ]}>
                   {weekDay[0]}
                 </Text>
