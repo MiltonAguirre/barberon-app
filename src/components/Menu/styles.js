@@ -3,7 +3,7 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-import {LIGHT_COLOR, PRIMARY_COLOR} from '../../utils/constants';
+import {DARK_COLOR, LIGHT_COLOR, PRIMARY_COLOR} from '../../utils/constants';
 
 const styles = StyleSheet.create({
   container: {
@@ -25,12 +25,13 @@ const styles = StyleSheet.create({
     paddingBottom: 3,
   },
   title: {
-    fontSize: 28,
-    fontFamily: 'Poppins-Bold',
+    fontSize: 24,
+    fontFamily: 'Poppins-Regular',
     color: LIGHT_COLOR,
-    textShadowColor: PRIMARY_COLOR,
+    letterSpacing: 1.5,
+    textShadowColor: DARK_COLOR,
     textShadowOffset: {width: 1, height: 1},
-    textShadowRadius: 1,
+    textShadowRadius: 8,
   },
 });
 export default styles;

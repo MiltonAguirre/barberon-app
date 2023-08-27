@@ -100,63 +100,64 @@ const ProductsList = ({products, saveTurn, myRole}) => {
               />
               <ProductCard {...products[productIdx]} />
 
-              <>
-                <View style={{alignItems: 'center'}}>
-                  <TouchableOpacity
-                    style={styles.btnDelay}
-                    onPress={showDatepicker}>
-                    <Text style={styles.textDelay}>
-                      {'Día: ' + date.toLocaleDateString()}
-                    </Text>
-                  </TouchableOpacity>
-                  {showDate && (
-                    <DateTimePicker
-                      testID="datePicker"
-                      value={date}
-                      onChange={onChangeDate}
+              {myRole == 2 && (
+                <>
+                  <View style={{alignItems: 'center'}}>
+                    <TouchableOpacity
+                      style={styles.btnDelay}
+                      onPress={showDatepicker}>
+                      <Text style={styles.textDelay}>
+                        {'Día: ' + date.toLocaleDateString()}
+                      </Text>
+                    </TouchableOpacity>
+                    {showDate && (
+                      <DateTimePicker
+                        testID="datePicker"
+                        value={date}
+                        onChange={onChangeDate}
+                      />
+                    )}
+                    <TouchableOpacity
+                      style={styles.btnDelay}
+                      onPress={showTimepicker}>
+                      <Text style={styles.textDelay}>
+                        {'Horario: ' +
+                          dateTime.getHours() +
+                          ':' +
+                          (dateTime.getMinutes() || '00') +
+                          'hs'}
+                      </Text>
+                    </TouchableOpacity>
+                    {showTime && (
+                      <DateTimePicker
+                        testID="dateTimePicker"
+                        value={dateTime}
+                        mode="time"
+                        display="spinner"
+                        is24Hour={true}
+                        onChange={onChangeTime}
+                        minuteInterval={30}
+                      />
+                    )}
+                  </View>
+                  <View style={[styles.row, {marginTop: hp('2.5%')}]}>
+                    <Button
+                      onPress={() => submitNewTurn(products[productIdx].id)}
+                      title="Obtener Turno"
+                      titleStyle={{
+                        color: LIGHT_COLOR,
+                        fontWeight: 'bold',
+                        textTransform: 'uppercase',
+                      }}
+                      buttonStyle={[
+                        styles.bottomBtns,
+                        {backgroundColor: PRIMARY_COLOR},
+                      ]}
+                      disabled={myRole != 2}
                     />
-                  )}
-                  <TouchableOpacity
-                    style={styles.btnDelay}
-                    onPress={showTimepicker}>
-                    <Text style={styles.textDelay}>
-                      {'Horario: ' +
-                        dateTime.getHours() +
-                        ':' +
-                        (dateTime.getMinutes() || '00') +
-                        'hs'}
-                    </Text>
-                  </TouchableOpacity>
-                  {showTime && (
-                    <DateTimePicker
-                      testID="dateTimePicker"
-                      value={dateTime}
-                      mode="time"
-                      display="spinner"
-                      is24Hour={true}
-                      onChange={onChangeTime}
-                      minuteInterval={30}
-                    />
-                  )}
-                </View>
-
-                <View style={[styles.row, {marginTop: hp('2.5%')}]}>
-                  <Button
-                    onPress={() => submitNewTurn(products[productIdx].id)}
-                    title="Obtener Turno"
-                    titleStyle={{
-                      color: LIGHT_COLOR,
-                      fontWeight: 'bold',
-                      textTransform: 'uppercase',
-                    }}
-                    buttonStyle={[
-                      styles.bottomBtns,
-                      {backgroundColor: PRIMARY_COLOR},
-                    ]}
-                    disabled={myRole != 2}
-                  />
-                </View>
-              </>
+                  </View>
+                </>
+              )}
             </View>
           </Modal>
         )}

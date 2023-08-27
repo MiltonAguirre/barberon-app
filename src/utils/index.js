@@ -6,9 +6,9 @@ import {PermissionsAndroid} from 'react-native';
 export const checkIdOpen = (schedules, days) => {
   const now = new Date();
   let days_array = days.split(',');
-  const now_wday = now.getDay();
+  const now_weekDay = now.getDay();
   let res = false;
-  if (days_array[now_wday]) {
+  if (days_array[now_weekDay]) {
     schedules.forEach(schedule => {
       if (schedule.open <= now.getHours() && schedule.close > now.getHours()) {
         res = true;
@@ -20,32 +20,47 @@ export const checkIdOpen = (schedules, days) => {
 export const validateEmail = email => {
   //bassed on https://blog.mailtrap.io/react-native-email-validation/
   const expression = /\S+@\S+\.\S+/;
-  if (!email || email.length < 6 || !expression.test(String(email)))
+  if (!email || email.length < 6 || !expression.test(String(email))) {
     return false;
-  else return true;
+  } else {
+    return true;
+  }
 };
 export const validateString = string => {
-  if (!string || string.length < 3) return false;
+  if (!string || string.length < 3) {
+    return false;
+  }
   return true;
 };
 export const validateLocation = location => {
   const expression = /^[A-Za-z0-9Ññ ]*$/u;
-  if (!location || location.length < 3 || !expression.test(String(location)))
+  if (!location || location.length < 3 || !expression.test(String(location))) {
     return false;
-  else return true;
+  } else {
+    return true;
+  }
 };
 export const validateName = name => {
   const expression = /^[A-Za-zÑñ ]*$/u;
-  if (!name || name.length < 3 || !expression.test(String(name))) return false;
-  else return true;
+  if (!name || name.length < 3 || !expression.test(String(name))) {
+    return false;
+  } else {
+    return true;
+  }
 };
 export const validatePhone = string => {
-  if (!string || string.length < 15 || string.length > 30) return false;
-  else return true;
+  if (!string || string.length < 15 || string.length > 30) {
+    return false;
+  } else {
+    return true;
+  }
 };
 export const validatePasswords = (pass, repass) => {
-  if (!pass || pass.length < 8 || pass !== repass) return false;
-  else return true;
+  if (!pass || pass.length < 8 || pass !== repass) {
+    return false;
+  } else {
+    return true;
+  }
 };
 
 export const getFullPathImage = image => {
@@ -53,7 +68,7 @@ export const getFullPathImage = image => {
 };
 
 export const optionsPhoto = {
-  title: 'Please choise a picture',
+  title: 'Please choose a picture',
   mediaType: 'photo',
   cancelButtonTitle: 'Cancel',
   cameraType: 'back',
@@ -68,7 +83,7 @@ export const optionsPhoto = {
   },
   saveToPhotos: true,
 };
-export async function hasAndroidPermission() {
+export async function hasAndroidPermissionGallery() {
   const permission = PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE;
 
   const hasPermission = await PermissionsAndroid.check(permission);
@@ -112,13 +127,13 @@ export const checkInternetConection = () => {
 
 export const timeAgo = date => {
   const seconds = Math.abs(new Date() - date) / 1000;
-  interval = Math.floor(seconds / 604800);
+  let interval = Math.floor(seconds / 604800);
   if (interval > 1) {
     return interval + ' semanas';
   }
   interval = Math.floor(seconds / 86400);
   if (interval > 1) {
-    return interval + ' dias';
+    return interval + ' días';
   }
   interval = Math.floor(seconds / 3600);
   if (interval > 1) {

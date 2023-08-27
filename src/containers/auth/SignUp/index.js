@@ -66,28 +66,24 @@ function SignUp({myOnPress, goBack}) {
       label: 'Nombre',
       onChange: onChangeFirstName,
       val: firstName,
-      secure: true,
     },
     {
       errorInput: eLastName,
       label: 'Apellidos',
       onChange: onChangeLastName,
       val: lastName,
-      secure: false,
     },
     {
       errorInput: eCountry,
       label: 'País',
       onChange: onChangeCountry,
       val: country,
-      secure: false,
     },
     {
       errorInput: eZip,
       label: 'Código postal',
       onChange: onChangeZip,
       val: zip,
-      secure: false,
     },
 
     {

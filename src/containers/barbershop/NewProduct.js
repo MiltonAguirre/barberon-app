@@ -1,12 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {
-  View,
-  Modal,
-  PermissionsAndroid,
-  StyleSheet,
-  TouchableOpacity,
-  TextInput,
-} from 'react-native';
+import {Alert, View, Modal, StyleSheet, TouchableOpacity} from 'react-native';
 import {Text, Button, Icon} from 'react-native-elements';
 import {
   widthPercentageToDP as wp,
@@ -16,6 +9,7 @@ import {launchImageLibrary} from 'react-native-image-picker';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import {DARK_COLOR, LIGHT_COLOR, PRIMARY_COLOR} from '../../utils/constants';
 import InputForm from '../../shares/inputForm';
+import {hasAndroidPermissionGallery} from '../../utils';
 const options = {
   title: 'Please choise a picture',
   cancelButtonTitle: 'Cancel',
@@ -29,20 +23,6 @@ const options = {
     path: 'images',
   },
 };
-async function hasAndroidPermission() {
-  const permission = PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE;
-
-  const hasPermission = await PermissionsAndroid.check(permission);
-  if (hasPermission) {
-    return true;
-  }
-  const status = await PermissionsAndroid.request(permission, {
-    title: 'Image gallery app permission',
-    message: 'Image gallery needs your permission to access your photos',
-    buttonPositive: 'Ok',
-  });
-  return status === 'granted';
-}
 const NewProductForm = ({submit, closeModal, visible}) => {
   const [name, setName] = useState('');
   const [ename, seteName] = useState(false);
@@ -72,7 +52,7 @@ const NewProductForm = ({submit, closeModal, visible}) => {
   const attachPhoto = async () => {
     console.log('attachPhoto');
 
-    const status = await hasAndroidPermission();
+    const status = await hasAndroidPermissionGallery();
     console.log(status);
     if (status) {
       const response = await launchImageLibrary(options);
@@ -92,7 +72,7 @@ const NewProductForm = ({submit, closeModal, visible}) => {
     }
   };
   const preSubmit = () => {
-    if ((name, price, description, delay, photo))
+    if ((name, price, description, delay, photo)) {
       submit(
         name,
         price,
@@ -101,41 +81,47 @@ const NewProductForm = ({submit, closeModal, visible}) => {
         delay.getMinutes(),
         photo,
       );
+    }
   };
   useEffect(() => {
     const aux_delay = delay;
     aux_delay.setHours(1);
     aux_delay.setMinutes(0);
     setDelay(aux_delay);
-  }, []);
+  }, [delay]);
+
+  const inputs = [
+    {
+      errorInput: ename,
+      label: 'Nombre',
+      onChange: setName,
+      val: name,
+    },
+    {
+      errorInput: edescription,
+      label: 'Descripción',
+      onChange: setDescription,
+      val: description,
+    },
+    {
+      errorInput: eprice,
+      label: 'Precio',
+      onChange: setPrice,
+      val: price,
+    },
+  ];
   return (
     <Modal visible={visible} animationType="slide" transparent={true}>
       <View style={styles.modalContent}>
         <View style={styles.modal}>
           <Text style={styles.textModal}>Crear Producto</Text>
-          <InputForm
-            label="Nombre"
-            val={name}
-            errorInput={ename}
-            onChange={setName}
-          />
-
-          <TextInput
-            style={[styles.input, eprice ? styles.error : '']}
-            onChangeText={val => setPrice(val)}
-            keyboardType="numeric"
-            value={price}
-            inputStyle={{color: 'white'}}
-            placeholder="Precio"
-            placeholderTextColor={LIGHT_COLOR}
-          />
+          {inputs.map((item, index) => (
+            <InputForm key={index} {...item} />
+          ))}
           <TouchableOpacity style={styles.btnDelay} onPress={showTimepicker}>
+            <Icon name="person" color={LIGHT_COLOR} />
             <Text style={{color: LIGHT_COLOR, textAlign: 'center'}}>
-              {'Demora ' +
-                delay.getHours() +
-                ':' +
-                (delay.getMinutes() || '00') +
-                'hs'}
+              {delay.getHours() + ':' + (delay.getMinutes() || '00') + 'hs'}
             </Text>
           </TouchableOpacity>
           {show && (
@@ -149,12 +135,6 @@ const NewProductForm = ({submit, closeModal, visible}) => {
               minuteInterval={30}
             />
           )}
-          <InputForm
-            label="Descripción"
-            val={description}
-            errorInput={edescription}
-            onChange={setDescription}
-          />
           <TouchableOpacity
             style={[styles.btnPhoto, photo && {backgroundColor: PRIMARY_COLOR}]}
             onPress={attachPhoto}>
@@ -173,20 +153,23 @@ const NewProductForm = ({submit, closeModal, visible}) => {
               onPress={closeModal}
               title="Cancelar"
               titleStyle={{color: PRIMARY_COLOR}}
-              buttonStyle={{
-                backgroundColor: LIGHT_COLOR,
-                borderRadius: 12,
-                paddingHorizontal: 10,
-              }}
+              buttonStyle={[
+                styles.btn,
+                {
+                  backgroundColor: LIGHT_COLOR,
+                },
+              ]}
             />
             <Button
               onPress={preSubmit}
               title="Nuevo"
-              buttonStyle={{
-                backgroundColor: PRIMARY_COLOR,
-                borderRadius: 12,
-                paddingHorizontal: 10,
-              }}
+              titleStyle={{color: LIGHT_COLOR}}
+              buttonStyle={[
+                styles.btn,
+                {
+                  backgroundColor: PRIMARY_COLOR,
+                },
+              ]}
             />
           </View>
         </View>
@@ -205,7 +188,6 @@ const styles = StyleSheet.create({
     opacity: 0.97,
   },
   modal: {
-    height: hp('60%'),
     width: wp('80%'),
     alignSelf: 'center',
     justifyContent: 'center',
@@ -258,7 +240,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   btnDelay: {
-    height: 10,
+    flexDirection: 'row',
+    alignItems: 'center',
+    height: 40,
     width: wp('70%'),
     margin: 4,
     borderRadius: 12,
@@ -268,7 +252,10 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     justifyContent: 'center',
   },
-
+  btn: {
+    borderRadius: 12,
+    paddingHorizontal: 10,
+  },
   input: {
     width: wp('70%'),
     height: 40,
